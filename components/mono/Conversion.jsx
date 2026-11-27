@@ -2,7 +2,7 @@
 
 import React, { useEffect, useId, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SIM_DEFAULTS, calcNet, eur, bracketFor } from "@/components/inicio/NetSimulator";
+import { SIM_DEFAULTS, calcNet, eur } from "@/components/inicio/NetSimulator";
 
 // Peças de conversão partilhadas (telemóvel primeiro):
 //  FirstStep     → "O que quer vender?" + Continuar (abre o formulário já preenchido)
@@ -59,13 +59,6 @@ export function FirstStep({ tone = "light", className = "", title = "O que quer 
         className={`btn-lux mt-3 w-full ${dark ? "btn-lux--solid-light" : "btn-lux--solid-dark"}`}
       >
         Continuar
-      </button>
-      <button
-        type="button"
-        onClick={() => openSeller({ view: "sim" })}
-        className={`${compact ? "mt-2" : "mt-3"} w-full text-center text-[13px] underline-offset-4 hover:underline ${dark ? "text-white/75" : "text-neutral-500"}`}
-      >
-        Ou faça primeiro as contas →
       </button>
     </div>
   );
@@ -182,7 +175,7 @@ export function CompactSim({ className = "", dark = false }) {
       </p>
       <button
         type="button"
-        onClick={() => openSeller({ simulacao: sim, valor: bracketFor(r.liquido) })}
+        onClick={() => openSeller({ simulacao: sim })}
         className={`btn-lux mt-5 w-full ${dark ? "btn-lux--solid-light" : "btn-lux--solid-dark"}`}
       >
         Continuar para o pedido

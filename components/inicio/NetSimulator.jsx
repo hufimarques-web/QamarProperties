@@ -126,7 +126,7 @@ export function NetSimulator({ initial, onContinue, onSkip, idPrefix = "sim" }) 
 
   return (
     <div>
-      <p className="font-body text-[11px] font-medium uppercase tracking-[0.3em] text-[#6B6157]">Simulação opcional</p>
+      <p className="font-body text-[11px] font-medium uppercase tracking-[0.3em] text-[#6B6157]">Passo 1 de 2 · As contas</p>
       <h2
         id={`${idPrefix}-title`}
         className="mt-3 font-light leading-[1.02] text-[#1C1719]"
@@ -307,9 +307,13 @@ export function NetSimulator({ initial, onContinue, onSkip, idPrefix = "sim" }) 
 
       <div className="sticky bottom-0 -mx-6 mt-8 border-t border-[#E4DED6] bg-[#FAF8F4]/95 px-6 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur md:static md:mx-0 md:border-0 md:bg-transparent md:p-0">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <button type="button" onClick={onSkip} className="order-2 font-body text-[14px] text-[#4A423C] underline-offset-4 hover:underline sm:order-1">
-            Preencher sem simular
-          </button>
+          {onSkip ? (
+            <button type="button" onClick={onSkip} className="order-2 font-body text-[14px] text-[#4A423C] underline-offset-4 hover:underline sm:order-1">
+              Preencher sem simular
+            </button>
+          ) : (
+            <span className="order-2 font-body text-[13px] text-[#8A8078] sm:order-1">A seguir: pedir o estudo de mercado</span>
+          )}
           <button
             type="button"
             onClick={() => onContinue({ ...v, ...r })}

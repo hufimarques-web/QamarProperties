@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import { NetSimulator, bracketFor, eur } from "./NetSimulator";
+import { NetSimulator, eur } from "./NetSimulator";
 
 // Formulário de venda / compra ao estilo do "Get in touch" da Emaar:
 // cartão claro, título serifado, legendas pequenas em maiúsculas,
@@ -57,7 +57,8 @@ const VARIANTS = {
       {
         id: "zona",
         question: "Onde fica o imóvel?",
-        options: ["Aveiro (centro)", "Esgueira / Aradas / Glória e Vera Cruz", "Ílhavo / Gafanhas", "Outro concelho da Região de Aveiro"],
+        input: "text",
+        placeholder: "Ex.: Esgueira, Aveiro",
       },
       {
         id: "licenca",
@@ -69,7 +70,8 @@ const VARIANTS = {
         id: "valor",
         question: "Quanto gostaria de receber, mais ou menos?",
         subtext: "Não precisa de ter certeza. O estudo de mercado ajuda a decidir.",
-        options: ["Até 150.000 €", "150.000 € a 250.000 €", "250.000 € a 400.000 €", "Ainda não sei"],
+        input: "money",
+        placeholder: "Ex.: 200 000",
       },
       {
         id: "contact",
@@ -176,12 +178,34 @@ function Select({ id, value, onChange, options }) {
   );
 }
 
+// valor em euros, escrito à mão (só algarismos, com espaços a separar os milhares)
+function MoneyInput({ id, value, onChange, placeholder }) {
+  const digits = String(value || "").replace(/\D/g, "");
+  const shown = digits ? Number(digits).toLocaleString("pt-PT").replace(/\./g, " ") : "";
+  return (
+    <div className="relative">
+      <input
+        id={id}
+        required
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        placeholder={placeholder}
+        className={`${fieldCls} pr-10`}
+        value={shown}
+        onChange={(e) => onChange(e.target.value.replace(/\D/g, "").slice(0, 9))}
+      />
+      <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-body text-base text-[#6B6157]">€</span>
+    </div>
+  );
+}
+
 export function InvestmentForm({ variant = "vendedor", sectionClassName = "", sectionId }) {
   const cfg = VARIANTS[variant] || VARIANTS.vendedor;
   // perguntas curtas primeiro (aos pares), as de muitas opções no fim, a toda a largura
   const questions = cfg.steps
     .filter((st) => !st.isFinal)
-    .sort((a, b) => (a.options.length > 4) - (b.options.length > 4));
+    .sort((a, b) => ((a.options?.length || 0) > 4) - ((b.options?.length || 0) > 4));
   const contactStep = cfg.steps.find((st) => st.isFinal);
 
   const [mounted, setMounted] = useState(false);
@@ -192,6 +216,8 @@ export function InvestmentForm({ variant = "vendedor", sectionClassName = "", se
   const [view, setView] = useState("form"); // "form" | "sim"
   const scrollRef = useRef(null);
   const isSeller = variant === "vendedor";
+  // quem vende passa sempre primeiro pela calculadora da venda tradicional
+  const simDone = useRef(false);
 
   useEffect(() => setMounted(true), []);
 
@@ -201,15 +227,12 @@ export function InvestmentForm({ variant = "vendedor", sectionClassName = "", se
   };
   const openWith = (v = "form") => {
     setDone(false);
-    setView(isSeller ? v : "form");
+    setView(isSeller ? (simDone.current ? v : "sim") : "form");
     setOpen(true);
   };
   const onSimContinue = (res) => {
-    setData((d) => ({
-      ...d,
-      simulacao: res,
-      valor: d.valor && d.valor !== "Ainda não sei" ? d.valor : bracketFor(res.liquido),
-    }));
+    simDone.current = true;
+    setData((d) => ({ ...d, simulacao: res }));
     goTo("form");
   };
 
@@ -217,6 +240,7 @@ export function InvestmentForm({ variant = "vendedor", sectionClassName = "", se
   useEffect(() => {
     const handler = (e) => {
       const { view: wanted, ...detail } = e.detail && typeof e.detail === "object" ? e.detail : {};
+      if (detail.simulacao) simDone.current = true;
       setData((d) => ({ ...d, ...detail }));
       openWith(wanted === "sim" ? "sim" : "form");
     };
@@ -307,7 +331,6 @@ export function InvestmentForm({ variant = "vendedor", sectionClassName = "", se
                   idPrefix={`${cfg.sectionId}-sim`}
                   initial={data.simulacao ? { ...data.simulacao } : undefined}
                   onContinue={onSimContinue}
-                  onSkip={() => goTo("form")}
                 />
                 <div className="h-6 md:hidden" />
               </div>
@@ -344,7 +367,7 @@ export function InvestmentForm({ variant = "vendedor", sectionClassName = "", se
                 </button>
               ) : (
                 <form onSubmit={handleSubmit} className="mt-9 space-y-6">
-                  {/* Simulação opcional (só para quem vende) */}
+                  {/* Simulação feita (só para quem vende) */}
                   {isSeller &&
                     (data.simulacao ? (
                       <div className="flex items-center justify-between gap-4 border border-[#CFC8BF] bg-white px-5 py-4">
@@ -359,30 +382,41 @@ export function InvestmentForm({ variant = "vendedor", sectionClassName = "", se
                           Editar
                         </button>
                       </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => goTo("sim")}
-                        className="group flex w-full items-center justify-between gap-4 border border-[#CFC8BF] bg-white px-5 py-4 text-left transition-colors hover:border-[#1C1719]"
-                      >
-                        <span>
-                          <span className="block font-body text-[11px] font-medium uppercase tracking-[0.22em] text-[#6B6157]">Simulação opcional</span>
-                          <span className="mt-1 block font-body text-[15px] text-[#1C1719]">Quanto lhe fica no bolso numa venda tradicional?</span>
-                        </span>
-                        <span className="shrink-0 font-body text-[12px] uppercase tracking-[0.2em] text-[#1C1719] transition-transform group-hover:translate-x-1">
-                          Fazer as contas →
-                        </span>
-                      </button>
-                    ))}
+                    ) : null)}
 
                   {/* Sobre a casa */}
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     {questions.map((q) => (
-                      <div key={q.id} className={q.options.length > 4 ? "sm:col-span-2" : ""}>
+                      <div key={q.id} className={(q.options?.length || 0) > 4 ? "sm:col-span-2" : ""}>
                         <label htmlFor={`${cfg.sectionId}-${q.id}`} className={labelCls}>
                           {LABELS[q.id] || q.question}
                         </label>
-                        <Select id={`${cfg.sectionId}-${q.id}`} value={data[q.id]} onChange={set(q.id)} options={q.options} />
+                        {q.input === "text" ? (
+                          <input
+                            id={`${cfg.sectionId}-${q.id}`}
+                            required
+                            type="text"
+                            autoComplete="address-level2"
+                            placeholder={q.placeholder}
+                            className={fieldCls}
+                            value={data[q.id] || ""}
+                            onChange={(e) => set(q.id)(e.target.value)}
+                          />
+                        ) : q.input === "money" ? (
+                          <MoneyInput
+                            id={`${cfg.sectionId}-${q.id}`}
+                            value={data[q.id]}
+                            onChange={set(q.id)}
+                            placeholder={q.placeholder}
+                          />
+                        ) : (
+                          <Select id={`${cfg.sectionId}-${q.id}`} value={data[q.id]} onChange={set(q.id)} options={q.options} />
+                        )}
+                        {q.input === "money" && data.simulacao ? (
+                          <p className="mt-2 font-body text-[12px] leading-snug text-[#6B6157]">
+                            Numa venda tradicional sobravam cerca de {eur(data.simulacao.liquido)}.
+                          </p>
+                        ) : null}
                       </div>
                     ))}
                   </div>
