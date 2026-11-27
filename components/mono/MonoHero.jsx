@@ -15,10 +15,10 @@ export const SANS = "Inter, system-ui, -apple-system, sans-serif";
 const EASE = [0.16, 1, 0.3, 1];
 
 const SIDES = [
-  { src: "/opt/c-valor.jpg", alt: "Fachada Arte Nova com azulejos junto ao canal de Aveiro", x: -2, from: 0.3 },
-  { src: "/opt/m-valorizar.jpg", alt: "Sala renovada com vista para a ria", x: -1, from: 0.24 },
+  { src: "/real/aveiro-azulejos.jpg", alt: "Fachada com azulejos em Aveiro", x: -2, from: 0.3 },
+  { src: "/real/sala-arvores.jpg", alt: "Sala luminosa com janelas do chão ao teto", x: -1, from: 0.24 },
   { src: "/opt/p-sala.jpg", alt: "Sala de um apartamento clássico recuperado, com janelas altas", x: 1, from: 0.24 },
-  { src: "/mono/hero-dusk.jpg", alt: "Casa junto ao canal ao anoitecer", x: 2, from: 0.3 },
+  { src: "/real/aveiro-canal-tarde.jpg", alt: "Canal de Aveiro ao fim da tarde", x: 2, from: 0.3 },
 ];
 
 // largura da coluna e espaço entre colunas (vw): computador / telemóvel

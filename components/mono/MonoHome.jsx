@@ -171,8 +171,8 @@ export function MonoStages() {
       <div className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">
         <motion.div className="absolute inset-0" style={{ clipPath: clip }}>
           <motion.img
-            src="/mono/hero-dusk.jpg"
-            alt="Casa com azulejos junto a um canal de Aveiro ao anoitecer"
+            src="/real/aveiro-canal-tarde.jpg"
+            alt="Canal de Aveiro ao fim da tarde"
             className="absolute inset-0 h-full w-full object-cover"
             style={{ scale }}
           />
@@ -208,8 +208,8 @@ export function MonoGrow() {
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden md:h-screen">
         <motion.div className="relative overflow-hidden" style={{ width: w, height: h, borderRadius: radius }}>
           <motion.img
-            src="/intro/hero.jpg"
-            alt="Sala com vista para a ria de Aveiro ao pôr do sol"
+            src="/real/costa-nova.jpg"
+            alt="Casas às riscas da Costa Nova, Aveiro"
             className="absolute inset-0 h-full w-full object-cover"
             style={{ scale: imgScale }}
           />
@@ -234,8 +234,8 @@ export function MonoGrow() {
 
 // ── 5. Três cartões (como "Compact / Standard / Premium") ──
 const CARDS = [
-  { title: "Vender", text: "Diga quanto quer receber. Valor líquido, sem comissão.", meta: "0 € comissão", img: "/opt/c-valor.jpg", action: openSeller },
-  { title: "Comprar", text: "Casas antes dos portais, com o crédito já simulado.", meta: "Base de compradores", img: "/opt/m-valorizar.jpg", href: "/oportunidades" },
+  { title: "Vender", text: "Diga quanto quer receber. Valor líquido, sem comissão.", meta: "0 € comissão", img: "/real/aveiro-azulejos.jpg", action: openSeller },
+  { title: "Comprar", text: "Casas antes dos portais, com o crédito já simulado.", meta: "Base de compradores", img: "/real/sala-arvores.jpg", href: "/oportunidades" },
   { title: "Fazer as contas", text: "Quanto lhe sobra numa venda tradicional?", meta: "Simulador", img: "/mono/sk-planta.jpg", action: openSim },
 ];
 
@@ -352,8 +352,8 @@ export function MonoStats() {
     <section ref={ref} className="bg-white" style={{ fontFamily: SANS }}>
       <div className="relative h-[62svh] overflow-hidden md:h-[78vh]">
         <motion.img
-          src="/opt/sala-render.jpg"
-          alt="Sala renovada com vista para os canais de Aveiro"
+          src="/real/sala-outono.jpg"
+          alt="Sala com grandes janelas e luz de fim de tarde"
           className="absolute inset-0 h-[124%] w-full object-cover"
           style={{ y, top: "-12%" }}
           loading="lazy"
@@ -448,8 +448,8 @@ export function MonoQuote() {
   return (
     <section ref={ref} data-hide-cta className="relative flex h-[100svh] items-center justify-center overflow-hidden bg-black pb-[calc(4rem+env(safe-area-inset-bottom))] md:h-[100vh] md:pb-0" style={{ fontFamily: SANS }}>
       <motion.img
-        src="/opt/p-noite.jpg"
-        alt="Sala de estar e jantar ao anoitecer, com as luzes acesas"
+        src="/real/aveiro-canal-dourado.jpg"
+        alt="Canal de Aveiro com luz dourada"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ scale }}
         loading="lazy"
