@@ -13,7 +13,7 @@ import { CompactSim } from "./Conversion";
 const ROOMS = [
   { src: "/real/aveiro-moliceiros.jpg", n: "01", t: "Estudo de mercado", d: "Vendas reais, não anúncios. Antes de nos dizer o seu valor." },
   { src: "/real/sala-janelas.jpg", n: "02", t: "Fotografia", d: "A casa fotografada como o comprador a quer ver." },
-  { src: "/mono/sk-sala.jpg", n: "03", t: "Renders e plantas", d: "O potencial da casa, à escala. Por nossa conta." },
+  { src: "/casas/fachada-moradias.webp", n: "03", t: "Renders e plantas", d: "O potencial da casa, à escala. Por nossa conta." },
   { src: "/real/sala-outono.jpg", n: "04", t: "Janela de propostas", d: "Com 5 ou mais interessados, propostas com data limite." },
   { src: "/opt/vender.jpg", n: "05", t: "Escritura em 60 dias", d: "Recebe o valor que pediu. Se não vendermos, saímos." },
 ];
