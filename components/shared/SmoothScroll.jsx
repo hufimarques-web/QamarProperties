@@ -46,8 +46,9 @@ export function SmoothScroll() {
           const y = window.scrollY;
           if (r.top > 1 || !starts.has(el)) starts.set(el, r.top + y);
           const start = starts.get(el);
-          // a cena inclui a saída: acaba quando a secção seguinte chega ao topo
-          const end = Math.min(start + r.height, document.documentElement.scrollHeight - vh());
+          // a cena acaba no último fotograma da animação (a secção continua no ecrã);
+          // a passagem para a secção seguinte é feita com o scroll normal
+          const end = Math.min(start + r.height - vh(), document.documentElement.scrollHeight - vh());
           const dur = parseFloat(el.dataset.sceneDuration || "2") * 1000;
           return { el, start, end, dur };
         })
