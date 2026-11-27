@@ -110,13 +110,13 @@ export function Navbar14() {
           nav.isMobileMenuOpen
             ? "bg-[#2A2129] py-2"
             : nav.isScrolled
-              ? "bg-[#F5F2ED]/95 py-1.5 shadow-[0_1px_0_rgba(76,61,74,0.08)] backdrop-blur-md"
+              ? "bg-[#F5F2ED] py-1.5 shadow-[0_1px_0_rgba(76,61,74,0.08)]"
               : "bg-transparent py-3 md:py-4"
         } ${
           nav.isPastHero ? "opacity-0 pointer-events-none" : "opacity-100"
         } ${
           isMono
-            ? "lg:top-4 lg:mx-auto lg:w-[92%] lg:max-w-[1080px] lg:rounded-[4px] lg:border lg:border-black/[0.06] lg:!bg-white/85 lg:!py-0 lg:shadow-[0_10px_40px_rgba(0,0,0,0.06)] lg:backdrop-blur-md"
+            ? "lg:top-4 lg:mx-auto lg:w-[92%] lg:max-w-[1080px] lg:rounded-[4px] lg:border lg:border-black/[0.06] lg:!bg-white/[0.97] lg:!py-0 lg:shadow-[0_10px_40px_rgba(0,0,0,0.06)]"
             : ""
         }`}
         style={isMono ? { fontFamily: "Inter, system-ui, sans-serif" } : undefined}

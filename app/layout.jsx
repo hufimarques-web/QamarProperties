@@ -1,5 +1,5 @@
 import "./globals.css";
-import { GodRaysBackground } from "@/components/GodRaysBackground";
+import { SmoothScroll } from "@/components/shared/SmoothScroll";
 import { SITE, SITE_URL } from "@/lib/site";
 import { MobileTabBar } from "@/components/shared/MobileTabBar";
 
@@ -97,7 +97,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <GodRaysBackground />
+        <SmoothScroll />
         {children}
         {/* Espaço para a barra inferior do telemóvel não tapar o rodapé */}
         <div className="h-[calc(60px+env(safe-area-inset-bottom))] bg-[#141011] md:hidden" aria-hidden="true" />

@@ -98,7 +98,7 @@ export function MobileTabBar() {
       {visible && (
         <motion.nav
           aria-label="Navegação rápida"
-          className="fixed inset-x-0 bottom-0 z-[990] border-t border-white/10 bg-[#1C1719]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
+          className="fixed inset-x-0 bottom-0 z-[990] border-t border-white/10 bg-[#1C1719] pb-[env(safe-area-inset-bottom)] md:hidden"
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
           exit={{ y: "100%" }}

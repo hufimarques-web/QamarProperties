@@ -104,10 +104,12 @@ function FlyingWord({ p, ready }) {
       return;
     }
 
-    const size = parseFloat(getComputedStyle(span).fontSize);
-    if (!metrics.current || metrics.current.size !== size) {
+    // medidas da letra só quando mudam (redimensionar), não a cada frame do scroll
+    if (!metrics.current) {
+      const size = parseFloat(getComputedStyle(span).fontSize);
       metrics.current = { size, ...fontMetrics(size) };
     }
+    const size = metrics.current.size;
     const m = metrics.current;
     const lr = layer.getBoundingClientRect();
     const nat = { left: lr.left + fly.offsetLeft, top: lr.top + fly.offsetTop, width: fly.offsetWidth };
@@ -141,7 +143,10 @@ function FlyingWord({ p, ready }) {
   useEffect(() => {
     if (!mounted) return;
     update();
-    document.fonts?.ready.then(update);
+    document.fonts?.ready.then(() => {
+      metrics.current = null; // a letra chegou: medir de novo
+      update();
+    });
     const onResize = () => {
       metrics.current = null;
       update();
@@ -150,14 +155,14 @@ function FlyingWord({ p, ready }) {
     const header = document.querySelector("[data-nav-header]");
     const mo = new MutationObserver(update);
     if (header) mo.observe(header, { attributes: true, attributeFilter: ["data-menu-open"] });
-    // a barra muda de altura ao fazer scroll (transição de 300 ms): segue-a
-    const id = setInterval(update, 120);
-    const stop = setTimeout(() => clearInterval(id), 4000);
+    // a barra entra e muda de altura com transições: acompanha-as só nesses momentos
+    const timers = [300, 800, 1600, 2600].map((ms) => setTimeout(update, ms));
+    header?.addEventListener("transitionend", update);
     return () => {
       window.removeEventListener("resize", onResize);
       mo.disconnect();
-      clearInterval(id);
-      clearTimeout(stop);
+      timers.forEach(clearTimeout);
+      header?.removeEventListener("transitionend", update);
       const logo = document.querySelector("[data-nav-logo]");
       if (logo) {
         logo.style.opacity = "";
