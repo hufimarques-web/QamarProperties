@@ -56,7 +56,7 @@ export function MonoStatement() {
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const lines = ["Diga quanto quer receber.", "Vendemos em 60 dias.", "Sem comissão a somar."];
   return (
-    <section ref={ref} className="relative h-[300vh] bg-white">
+    <section ref={ref} data-scene data-scene-duration="3" className="relative h-[300vh] bg-white">
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden md:h-screen">
         {lines.map((l, i) => (
           <Phrase key={l} p={p} i={i} n={lines.length}>
@@ -167,7 +167,7 @@ export function MonoStages() {
   const leftX = useTransform(p, [0.68, 0.98], ["-110%", "0%"]);
   const rightX = useTransform(p, [0.68, 0.98], ["110%", "0%"]);
   return (
-    <section ref={ref} className="relative h-[460vh] bg-[#0A0A0A]" style={{ fontFamily: SANS }}>
+    <section ref={ref} data-scene data-scene-duration="3.6" className="relative h-[460vh] bg-[#0A0A0A]" style={{ fontFamily: SANS }}>
       <div className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">
         <motion.div className="absolute inset-0" style={{ clipPath: clip }}>
           <motion.img
@@ -204,7 +204,7 @@ export function MonoGrow() {
   const textOpacity = useTransform(p, [0.62, 0.78], [0, 1]);
   const textY = useTransform(p, [0.62, 0.78], [40, 0]);
   return (
-    <section ref={ref} className="relative h-[320vh] bg-black" style={{ fontFamily: SANS }}>
+    <section ref={ref} data-scene data-scene-duration="2.2" className="relative h-[320vh] bg-black" style={{ fontFamily: SANS }}>
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden md:h-screen">
         <motion.div className="relative overflow-hidden" style={{ width: w, height: h, borderRadius: radius }}>
           <motion.img

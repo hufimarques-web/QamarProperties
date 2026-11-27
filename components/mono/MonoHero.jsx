@@ -225,7 +225,7 @@ export function MonoHero({ ready = true }) {
   const restOpacity = useTransform(p, (v) => (v <= REST ? 1 : 0));
 
   return (
-    <section ref={ref} id="hero-desktop" data-hide-cta className="mono-root relative h-[320svh] bg-white md:h-[260vh]" style={{ fontFamily: SANS }}>
+    <section ref={ref} id="hero-desktop" data-hide-cta data-scene data-scene-duration="2.2" className="mono-root relative h-[320svh] bg-white md:h-[260vh]" style={{ fontFamily: SANS }}>
       {/* QAMAR gigante: com o scroll encolhe e voa até ao logótipo da barra */}
       <FlyingWord p={p} ready={ready} />
       <div className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">

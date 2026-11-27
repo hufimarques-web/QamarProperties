@@ -267,7 +267,7 @@ export function ExpandImage({ src, alt = "", caption, title }) {
   const capOpacity = useTransform(p, [0.6, 0.8], [0, 1]);
   const capY = useTransform(p, [0.6, 0.8], [30, 0]);
   return (
-    <section ref={ref} className="relative h-[240vh] bg-white" style={{ fontFamily: SANS }}>
+    <section ref={ref} data-scene data-scene-duration="1.8" className="relative h-[240vh] bg-white" style={{ fontFamily: SANS }}>
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <motion.div className="absolute inset-0" style={{ clipPath: clip }}>
           <motion.img src={src} alt={alt} className="h-full w-full object-cover" style={{ scale }} />
@@ -358,7 +358,7 @@ export function HorizontalScroll({ head, children }) {
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const x = useTransform(p, [0, 1], [0, -dist]);
   return (
-    <section ref={ref} className="relative bg-[#F7F7F5]" style={{ height: `calc(100vh + ${dist}px)`, fontFamily: SANS }}>
+    <section ref={ref} data-scene data-scene-duration="2.8" className="relative bg-[#F7F7F5]" style={{ height: `calc(100vh + ${dist}px)`, fontFamily: SANS }}>
       <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden pb-10 pt-24">
         <div className="mx-auto w-full max-w-[1400px] px-5 md:px-[5vw]">{head}</div>
         <motion.div ref={trackRef} className="mt-10 flex w-max gap-4 px-5 md:mt-14 md:gap-6 md:px-[5vw]" style={{ x }}>
