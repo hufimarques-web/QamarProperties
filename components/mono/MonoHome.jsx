@@ -37,10 +37,39 @@ function Eyebrow({ children, light }) {
 function Phrase({ p, i, n, children }) {
   const s = i / n;
   const e = (i + 1) / n;
+  const first = i === 0;
   const last = i === n - 1;
-  const opacity = useTransform(p, last ? [s, s + 0.08] : [s, s + 0.08, e - 0.06, e], last ? [0, 1] : [0, 1, 1, 0]);
-  const y = useTransform(p, last ? [s, s + 0.1] : [s, s + 0.1, e - 0.06, e], last ? [60, 0] : [60, 0, 0, -60]);
-  const blur = useTransform(p, last ? [s, s + 0.1] : [s, s + 0.1, e - 0.06, e], last ? ["blur(14px)", "blur(0px)"] : ["blur(14px)", "blur(0px)", "blur(0px)", "blur(14px)"]);
+  // Nunca há ecrã vazio: a primeira frase já está à vista quando a secção chega,
+  // e a troca entre frases é cruzada (a seguinte entra enquanto a anterior sai).
+  const at = [];
+  const op = [];
+  const ys = [];
+  const bl = [];
+  if (!first) {
+    at.push(s - 0.035, s + 0.045);
+    op.push(0, 1);
+    ys.push(60, 0);
+    bl.push("blur(14px)", "blur(0px)");
+  } else {
+    at.push(0);
+    op.push(1);
+    ys.push(0);
+    bl.push("blur(0px)");
+  }
+  if (!last) {
+    at.push(e - 0.045, e + 0.035);
+    op.push(1, 0);
+    ys.push(0, -60);
+    bl.push("blur(0px)", "blur(14px)");
+  } else {
+    at.push(1);
+    op.push(1);
+    ys.push(0);
+    bl.push("blur(0px)");
+  }
+  const opacity = useTransform(p, at, op);
+  const y = useTransform(p, at, ys);
+  const blur = useTransform(p, at, bl);
   return (
     <motion.h2
       className="absolute inset-x-0 px-6 text-center font-medium tracking-[-0.035em] text-[#0A0A0A]"
