@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { CompactSim } from "./Conversion";
 
-// Secção 3D: com o scroll, a câmara entra na casa e atravessa as divisões,
-// uma etapa da venda em cada uma. No computador, o simulador fica ao lado
-// (converte ali mesmo); no telemóvel o túnel ocupa o ecrã e o simulador vem a seguir.
+// Por dentro da venda: as cinco etapas, uma foto por etapa.
+// Animação "cortina e pilha" (como nos Sites of the Day): cada foto sobe por cima
+// da anterior como uma cortina, a anterior recua e escurece, a foto ativa
+// aproxima-se devagar (Ken Burns) e o texto entra por trás de uma máscara.
+// No computador, o simulador fica ao lado (igual); no telemóvel as fotos ocupam o ecrã.
 
 const ROOMS = [
   { src: "/opt/estudar.jpg", n: "01", t: "Estudo de mercado", d: "Vendas reais, não anúncios. Antes de nos dizer o seu valor." },
@@ -15,51 +17,77 @@ const ROOMS = [
   { src: "/opt/sala-render.jpg", n: "04", t: "Janela de propostas", d: "Com 5 ou mais interessados, propostas com data limite." },
   { src: "/opt/vender.jpg", n: "05", t: "Escritura em 60 dias", d: "Recebe o valor que pediu. Se não vendermos, saímos." },
 ];
+const N = ROOMS.length;
 
-const D = 1300; // distância entre divisões (px em profundidade)
-// a câmara para à frente da última divisão (não a atravessa), para o fim ficar nítido
-const TOTAL = (ROOMS.length - 1) * D;
-
-function Room({ z, room, i, last }) {
-  const at = i * D;
-  // aproxima-se do fundo → nítida → passa pela câmara e desaparece (a última fica)
-  const opacity = useTransform(
-    z,
-    last ? [at - 2.6 * D, at - 1.2 * D] : [at - 2.6 * D, at - 1.2 * D, at + 250, at + 700],
-    last ? [0, 1] : [0, 1, 1, 0]
-  );
-  const side = i % 2 === 0 ? -1 : 1;
+// s = posição na sequência: 0 (primeira foto) … N-1 (última foto)
+function Photo({ s, i }) {
+  const first = i === 0;
+  const last = i === N - 1;
+  // entra: cortina de baixo para cima
+  const clip = useTransform(s, [i - 0.8, i - 0.1], ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]);
+  // fica para trás quando a seguinte sobe: recua e escurece
+  const back = useTransform(s, [i + 0.1, i + 0.8], [1, last ? 1 : 0.9]);
+  const shade = useTransform(s, [i + 0.1, i + 0.8], [0, last ? 0 : 0.65]);
+  // Ken Burns: aproxima-se devagar enquanto está à vista
+  const zoom = useTransform(s, [i - 0.8, i + 0.8], [1.18, 1.02]);
+  const y = useTransform(s, [i - 0.8, i - 0.1], ["12%", "0%"]);
   return (
-    <motion.div
-      className="absolute top-[54%] w-[86%] md:w-[58%]"
-      style={{ left: `calc(50% + ${side * 4}%)`, x: "-50%", y: "-50%", z: -at, rotateY: side * 6, opacity }}
-    >
-      <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 md:aspect-[4/3]">
-        <img src={room.src} alt={room.t} className="h-full w-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
-        <div className="absolute bottom-0 left-0 p-5 text-white md:p-7">
-          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/65">
-            {room.n} / 0{ROOMS.length}
-          </p>
-          <p className="mt-2 text-[26px] font-medium leading-tight tracking-[-0.02em] md:text-[34px]">{room.t}</p>
-          <p className="mt-2 max-w-sm text-[14px] leading-relaxed text-white/80 md:text-[15px]">{room.d}</p>
-        </div>
-      </div>
+    <motion.div className="absolute inset-0 origin-top overflow-hidden" style={{ clipPath: first ? undefined : clip, scale: back, zIndex: i }}>
+      <motion.img
+        src={ROOMS[i].src}
+        alt={ROOMS[i].t}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ scale: zoom, y: first ? 0 : y }}
+        loading={first ? "eager" : "lazy"}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/30" />
+      <motion.div className="absolute inset-0 bg-black" style={{ opacity: shade }} />
     </motion.div>
+  );
+}
+
+// texto de cada etapa: sobe por trás de uma máscara e sai para cima
+function Caption({ s, i }) {
+  const last = i === N - 1;
+  const inR = [i - 0.55, i - 0.15];
+  const outR = [i + 0.15, i + 0.55];
+  const y = useTransform(s, last ? inR : [...inR, ...outR], last ? ["110%", "0%"] : ["110%", "0%", "0%", "-110%"]);
+  const opacity = useTransform(s, last ? inR : [...inR, ...outR], last ? [0, 1] : [0, 1, 1, 0]);
+  const r = ROOMS[i];
+  return (
+    <div className="absolute inset-x-0 bottom-0" aria-hidden={i !== 0}>
+      <div className="overflow-hidden">
+        <motion.p className="font-medium leading-none tracking-[-0.04em] text-white/90 tabular-nums" style={{ y, fontSize: "clamp(56px, 7vw, 120px)" }}>
+          {r.n}
+        </motion.p>
+      </div>
+      <div className="mt-3 overflow-hidden">
+        <motion.p className="text-[28px] font-medium leading-tight tracking-[-0.025em] text-white md:text-[40px]" style={{ y }}>
+          {r.t}
+        </motion.p>
+      </div>
+      <motion.p className="mt-3 max-w-md text-[14px] leading-relaxed text-white/75 md:text-[16px]" style={{ opacity }}>
+        {r.d}
+      </motion.p>
+    </div>
+  );
+}
+
+// barra de progresso em segmentos: um por etapa
+function Segment({ s, i }) {
+  const fill = useTransform(s, [i - 1, i], [0, 1]);
+  return (
+    <div className="h-[2px] flex-1 overflow-hidden bg-white/20">
+      <motion.div className="h-full origin-left bg-white" style={{ scaleX: i === 0 ? 1 : fill }} />
+    </div>
   );
 }
 
 export function RoomTunnel({ className = "", ...rest }) {
   const ref = useRef(null);
-  const barRef = useRef(null);
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const z = useTransform(p, [0, 1], [0, TOTAL]);
-  // a "porta" abre-se no início: a primeira divisão vem de longe
-  const doorScale = useTransform(p, [0, 0.08], [0.7, 1]);
-  const doorOpacity = useTransform(p, [0, 0.05], [0, 1]);
-  useMotionValueEvent(p, "change", (v) => {
-    if (barRef.current) barRef.current.style.transform = `scaleX(${v})`;
-  });
+  // um pouco de margem no início e no fim, para a primeira e a última foto respirarem
+  const s = useTransform(p, [0.04, 0.96], [0, N - 1]);
 
   return (
     <section
@@ -72,26 +100,31 @@ export function RoomTunnel({ className = "", ...rest }) {
       {...rest}
     >
       <div className="sticky top-0 h-[100svh] md:grid md:grid-cols-[1.4fr_1fr]">
-        {/* Túnel 3D */}
-        <div className="relative h-full overflow-hidden" style={{ perspective: 900, perspectiveOrigin: "50% 50%" }}>
-          <motion.div className="absolute inset-0" style={{ scale: doorScale, opacity: doorOpacity, transformStyle: "preserve-3d" }}>
-            <motion.div className="absolute inset-0" style={{ z, transformStyle: "preserve-3d" }}>
-              {ROOMS.map((r, i) => (
-                <Room key={r.n} z={z} room={r} i={i} last={i === ROOMS.length - 1} />
-              ))}
-            </motion.div>
-          </motion.div>
+        {/* Fotos em cortina e pilha */}
+        <div className="relative h-full overflow-hidden bg-black">
+          {ROOMS.map((r, i) => (
+            <Photo key={r.n} s={s} i={i} />
+          ))}
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 bg-gradient-to-b from-black/80 to-transparent px-5 pb-16 pt-24 md:px-10 md:pt-28">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 bg-gradient-to-b from-black/80 to-transparent px-5 pb-16 pt-24 md:px-10 md:pt-28">
             <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/55">Por dentro da venda</p>
             <h2 className="mt-3 max-w-md text-[30px] font-medium leading-[1.02] tracking-[-0.035em] text-white md:text-[34px]">
               Da primeira visita à escritura.
             </h2>
           </div>
 
-          {/* progresso */}
-          <div className="absolute inset-x-5 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] h-px bg-white/15 md:inset-x-10 md:bottom-10">
-            <div ref={barRef} className="h-px origin-left bg-white" style={{ transform: "scaleX(0)" }} />
+          {/* texto da etapa */}
+          <div className="pointer-events-none absolute inset-x-5 bottom-[calc(7.5rem+env(safe-area-inset-bottom))] z-10 h-[46%] md:inset-x-10 md:bottom-20">
+            {ROOMS.map((r, i) => (
+              <Caption key={r.n} s={s} i={i} />
+            ))}
+          </div>
+
+          {/* progresso por etapas */}
+          <div className="absolute inset-x-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-10 flex gap-2 md:inset-x-10 md:bottom-10">
+            {ROOMS.map((r, i) => (
+              <Segment key={r.n} s={s} i={i} />
+            ))}
           </div>
         </div>
 
