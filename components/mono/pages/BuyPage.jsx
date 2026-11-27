@@ -7,6 +7,7 @@ import {
   Serif, WordReveal, ExpandImage, HorizontalScroll, EditorialHero, ArchImage, fadeUp, openBuyer, EASE,
 } from "../MonoKit";
 import { SANS } from "../MonoHero";
+import { CreditSimulator } from "../CreditSimulator";
 
 // /oportunidades — para quem compra.
 // Estrutura inspirada na Compass (Private Exclusives) e na Opendoor:
@@ -75,6 +76,15 @@ const FAQS = [
   { q: "E se o banco avaliar a casa abaixo do preço?", a: "Os cenários de crédito mostram, antes do CPCV, quanto capital extra precisaria com a avaliação a 100, 95, 90 e 85%. E o CPCV leva condição de crédito aprovado até uma data: se o crédito falhar, o sinal é devolvido." },
   { q: "O orçamento de obra obriga-me a fazer a obra convosco?", a: "Não. Pode adjudicá-lo ou usá-lo só como referência para decidir." },
 ];
+
+// passa a simulação para o formulário de comprador, já preenchido
+function enterWithSim(v, r) {
+  const preco = v.preco || 0;
+  const orcamento = preco < 150000 ? "Até 150.000 €" : preco < 250000 ? "150.000 € a 250.000 €" : "250.000 € a 400.000 €";
+  const share = preco ? r.entradaReal / preco : 0;
+  const capital = share < 0.1 ? "Menos de 10% do preço" : share <= 0.2 ? "10% a 20% do preço" : "Mais de 20% do preço";
+  window.dispatchEvent(new CustomEvent("open-buyer-form", { detail: { orcamento, capital, credito: "Fiz uma simulação" } }));
+}
 
 function OptionChip({ active, children, onClick }) {
   return (
@@ -152,9 +162,21 @@ export function BuyPage() {
         image="/real/apt-quarto-janela.jpg"
         imageAlt="Quarto com janela grande"
       >
-        <Btn onClick={openBuyer}>Simular crédito</Btn>
+        <Btn href="#simulador">Simular crédito</Btn>
         <Btn href="#comecar" variant="ghost-dark">Começar aqui</Btn>
       </EditorialHero>
+
+      {/* Simulador de crédito completo, com as regras do Banco de Portugal */}
+      <Section id="simulador" tone="grey">
+        <SectionHead
+          eyebrow="Simulador de crédito"
+          title={<>Quanto pode comprar, ao euro.</>}
+          text="Prestação, TAEG, impostos, seguros e o dinheiro de que precisa até à escritura. Com as regras do Banco de Portugal que o banco vai usar."
+        />
+        <div className="mt-12 md:mt-16">
+          <CreditSimulator onContinue={enterWithSim} />
+        </div>
+      </Section>
 
       {/* Moldura ameixa que se abre até ao ecrã inteiro (ERA Residence) */}
       <ExpandImage
@@ -234,7 +256,7 @@ export function BuyPage() {
       {/* 4. Como funciona: passos com a imagem presa ao lado */}
       <Section>
         <SectionHead n="04" eyebrow="Como funciona" title={<>Da simulação à escritura.</>} />
-        <StepsWithImage items={STEPS} cta={<Btn onClick={openBuyer}>Simular crédito</Btn>} />
+        <StepsWithImage items={STEPS} cta={<Btn href="#simulador">Simular crédito</Btn>} />
       </Section>
 
       {/* 5. Custos em números */}
@@ -272,7 +294,7 @@ export function BuyPage() {
         text="Diga-nos o que procura e quanto pode investir. Ajudamos com a simulação de crédito e enviamos-lhe as casas compatíveis antes de chegarem aos portais."
         image="/real/aveiro-canal-dourado.jpg"
       >
-        <Btn onClick={openBuyer} variant="solid-light">Simular crédito</Btn>
+        <Btn href="#simulador" variant="solid-light">Simular crédito</Btn>
         <Btn href="/oportunidade" variant="ghost-light">Ver um dossier</Btn>
       </DarkCta>
 
