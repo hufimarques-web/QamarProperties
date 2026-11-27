@@ -8,6 +8,8 @@ import { useEffect } from "react";
 //    leva a página do início ao fim da cena sozinha, à velocidade certa, como um vídeo.
 //    Para cima, a cena volta ao início da mesma forma.
 //    data-scene-duration="2.4" define a duração (segundos) da cena inteira.
+//    data-scene-stops="0.04,0.27,…" (frações da cena) faz a cena parar em cada passo:
+//    cada gesto toca só até ao passo seguinte, para dar tempo de ler.
 // 2) Fora das cenas, a roda do rato desliza suavemente (computador).
 // Respeita "reduzir movimento", o zoom (Ctrl + roda), os modais abertos e as zonas com scroll próprio.
 
@@ -50,7 +52,11 @@ export function SmoothScroll() {
           // a passagem para a secção seguinte é feita com o scroll normal
           const end = Math.min(start + r.height - vh(), document.documentElement.scrollHeight - vh());
           const dur = parseFloat(el.dataset.sceneDuration || "2") * 1000;
-          return { el, start, end, dur };
+          const len = r.height - vh();
+          const stops = el.dataset.sceneStops
+            ? el.dataset.sceneStops.split(",").map((f) => start + parseFloat(f) * len)
+            : null;
+          return { el, start, end, dur, stops };
         })
         .filter(Boolean);
     const recordStarts = () => scenes();
@@ -59,6 +65,17 @@ export function SmoothScroll() {
     const sceneFor = (dir, reach) => {
       const y = window.scrollY;
       for (const s of scenes()) {
+        if (s.stops) {
+          // cena por passos: vai só até ao passo seguinte (ou anterior)
+          const lastStop = s.stops[s.stops.length - 1];
+          if (dir > 0 && s.start - reach <= y && y < lastStop - 2) {
+            return { s, to: s.stops.find((v) => v > y + 2) };
+          }
+          if (dir < 0 && s.stops[0] + 2 < y && y <= lastStop + reach) {
+            return { s, to: [...s.stops].reverse().find((v) => v < y - 2) };
+          }
+          continue;
+        }
         if (dir > 0 && s.start - reach <= y && y < s.end - 2) return { s, to: s.end };
         if (dir < 0 && s.start + 2 < y && y <= s.end + reach) return { s, to: s.start };
       }
@@ -199,7 +216,8 @@ export function SmoothScroll() {
             const enteredDown = dir > 0 && prevY < s.start && y >= s.start && y < s.end - 2;
             const enteredUp = dir < 0 && prevY > s.end && y <= s.end && y > s.start + 2;
             if (enteredDown || enteredUp) {
-              play({ s, to: dir > 0 ? s.end : s.start });
+              const to = s.stops ? (dir > 0 ? s.stops[0] : s.stops[s.stops.length - 1]) : dir > 0 ? s.end : s.start;
+              play({ s, to });
               break;
             }
           }

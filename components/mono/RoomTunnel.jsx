@@ -94,7 +94,8 @@ export function RoomTunnel({ className = "", ...rest }) {
       ref={ref}
       data-hide-cta
       data-scene
-      data-scene-duration="4"
+      data-scene-duration="4.6"
+      data-scene-stops="0.04,0.27,0.5,0.73,0.96"
       className={`relative h-[520vh] bg-[#0A0A0A] ${className}`}
       style={{ fontFamily: "Inter, system-ui, sans-serif" }}
       {...rest}
