@@ -167,7 +167,7 @@ export function MonoStages() {
   const leftX = useTransform(p, [0.68, 0.98], ["-110%", "0%"]);
   const rightX = useTransform(p, [0.68, 0.98], ["110%", "0%"]);
   return (
-    <section ref={ref} data-scene data-scene-duration="3.6" className="relative h-[460vh] bg-[#0A0A0A]" style={{ fontFamily: SANS }}>
+    <section ref={ref} data-scene data-scene-duration="5" data-scene-stops="0.145,0.335,0.54,0.98" className="relative h-[460vh] bg-[#0A0A0A]" style={{ fontFamily: SANS }}>
       <div className="sticky top-0 h-[100svh] overflow-hidden md:h-screen">
         <motion.div className="absolute inset-0" style={{ clipPath: clip }}>
           <motion.img
