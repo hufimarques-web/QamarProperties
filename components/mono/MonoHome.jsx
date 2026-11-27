@@ -99,13 +99,13 @@ export function MonoStatement() {
 
 // ── 2. Texto + grelha de desenhos (bento) ──
 const TILES = [
-  { src: "/mono/sk-fachada.jpg", label: "Alçado da fachada", cls: "col-span-2 row-span-2" },
-  { src: "/mono/sk-planta.jpg", label: "Planta", cls: "" },
-  { src: "/mono/sk-sala.jpg", label: "Sala · perspetiva", cls: "row-span-2" },
-  { src: "/mono/sk-cozinha.jpg", label: "Cozinha", cls: "" },
-  { src: "/opt/valorizar.jpg", label: "Materiais e planta 3D", cls: "col-span-2" },
-  { src: "/mono/sk-corte.jpg", label: "Corte", cls: "" },
-  { src: "/opt/c-fotos.jpg", label: "Pormenor", cls: "" },
+  { src: "/projetos/fachada-principal.webp", label: "Fachada", cls: "col-span-2 row-span-2" },
+  { src: "/projetos/planta-tecnica.webp", label: "Planta técnica", cls: "" },
+  { src: "/projetos/sala-de-estar.webp", label: "Sala", cls: "row-span-2" },
+  { src: "/projetos/cozinha-open-space.webp", label: "Cozinha", cls: "" },
+  { src: "/projetos/planta-3d.webp", label: "Planta 3D", cls: "col-span-2" },
+  { src: "/projetos/exterior-traseiro-jardim.webp", label: "Jardim", cls: "" },
+  { src: "/projetos/quarto-suite-varanda.webp", label: "Suite", cls: "" },
 ];
 
 export function MonoGallery() {
@@ -151,7 +151,7 @@ export function MonoGallery() {
             </motion.figure>
           ))}
         </div>
-        <p className="mt-4 text-[12px] text-neutral-400">Imagens ilustrativas.</p>
+        <p className="mt-4 text-[12px] text-neutral-400">Renders e plantas de um projeto real em Aveiro.</p>
       </div>
     </section>
   );
