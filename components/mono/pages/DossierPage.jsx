@@ -47,12 +47,12 @@ const RECEIVE = [
   { b: "O que pode correr mal.", t: "Relatório técnico, documentos do condomínio, áreas comparadas e os motivos para não comprar, por escrito." },
 ];
 
-// Exemplo: casa de 250.000 €; o banco empresta 90% do menor valor entre preço e avaliação
+// Exemplo: casa de 250.000 €; o banco empresta 100% do menor valor entre preço e avaliação
 const PRICE = 250000;
 const eur = (n) => new Intl.NumberFormat("pt-PT", { maximumFractionDigits: 0 }).format(n) + " €";
 const SCENARIOS = [100, 95, 90, 85].map((pct) => {
   const aval = (PRICE * pct) / 100;
-  const loan = 0.9 * Math.min(PRICE, aval);
+  const loan = 1 * Math.min(PRICE, aval);
   return { pct, aval, loan, capital: PRICE - loan };
 });
 
@@ -245,7 +245,7 @@ export function DossierPage() {
                 Se o banco avaliar abaixo do preço.
               </h3>
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-neutral-600">
-                Casa de {eur(PRICE)}. O banco empresta até 90% do menor valor entre o preço e a avaliação. A diferença sai do seu capital.
+                Casa de {eur(PRICE)}. O banco empresta até 100% do menor valor entre o preço e a avaliação. A diferença sai do seu capital.
               </p>
               <div className="mt-8 overflow-x-auto [scrollbar-width:none]">
                 <table className="w-full min-w-[480px] border-collapse text-left text-[15px]">

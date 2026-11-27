@@ -30,7 +30,7 @@ const EXAMPLE = [
 ];
 
 const ROWS = [
-  { area: "Financeiro", red: "Taxa de esforço acima de 45% com subida de juros; falta capital mesmo com avaliação a 100%.", yellow: "Falta capital com avaliação a 90%; reserva inferior a 6 meses." },
+  { area: "Financeiro", red: "Taxa de esforço acima de 50% com subida de juros; falta capital mesmo com avaliação a 100%.", yellow: "Falta capital com avaliação a 90%; reserva inferior a 6 meses." },
   { area: "Legal", red: "Ónus sem solução; construções não licenciáveis.", yellow: "Áreas divergentes; anexos por legalizar." },
   { area: "Técnico", red: "Problemas de estrutura, humidades graves, cobertura sem orçamento.", yellow: "Instalação elétrica antiga; inspeção por concluir." },
   { area: "Condomínio", red: "Obras grandes aprovadas sem preço fechado.", yellow: "Quotas em atraso; fundo de reserva baixo." },

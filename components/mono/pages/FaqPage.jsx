@@ -11,7 +11,7 @@ import { SANS } from "../MonoHero";
 
 const BUYER = [
   { q: "Pago alguma coisa à Qamar quando compro?", a: "Não. Somos pagos pelo vendedor, e dizemos-lho desde o início. A simulação de crédito, os renders personalizados e o dossier não têm custo para si." },
-  { q: "Porque pedem a simulação de crédito antes da visita?", a: "Porque o banco não financia pelo preço anunciado. Avalia pelo valor de transação e empresta, no máximo, 90% do menor valor entre o preço e a avaliação. Assim sabe, antes de se apaixonar por uma casa, quanto dinheiro precisa até à escritura." },
+  { q: "Porque pedem a simulação de crédito antes da visita?", a: "Porque o banco não financia pelo preço anunciado. Avalia pelo valor de transação e empresta, no máximo, 100% do menor valor entre o preço e a avaliação. Assim sabe, antes de se apaixonar por uma casa, quanto dinheiro precisa até à escritura." },
   { q: "E se o banco avaliar a casa abaixo do preço?", a: "Os cenários de crédito mostram, antes do CPCV, quanto capital extra precisaria com a avaliação a 100, 95, 90 e 85%. E o CPCV leva condição de crédito aprovado até uma data: se o crédito falhar, o sinal é devolvido." },
   { q: "O orçamento de obra obriga-me a fazer a obra convosco?", a: "Não. Pode adjudicá-lo ou usá-lo só como referência para decidir." },
   { q: "Os renders mostram a casa real?", a: "Mostram uma simulação à escala, sempre identificada como tal e sempre ao lado das fotos reais. Servem para ver se a casa funciona para si." },

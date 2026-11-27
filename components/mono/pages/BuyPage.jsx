@@ -35,7 +35,7 @@ const STEPS = [
   {
     label: "Crédito primeiro",
     title: "Sabe quanto pode comprar antes de visitar.",
-    text: "Simulamos o seu crédito com as regras do Banco de Portugal: taxa de esforço máxima de 45%, testada com subida de juros, e financiamento até 90%. Vê o dinheiro de que precisa até à escritura, a prestação e a reserva que lhe sobra. Os casos mais apertados são confirmados pelo nosso intermediário de crédito parceiro.",
+    text: "Simulamos o seu crédito como o banco o vai analisar: taxa de esforço máxima de 50%, testada com subida de juros, e financiamento até 100%. Vê o dinheiro de que precisa até à escritura, a prestação e a reserva que lhe sobra. Os casos mais apertados são confirmados pelo nosso intermediário de crédito parceiro.",
     image: "/real/aveiro-azulejos.jpg",
     alt: "Fachada de azulejos em Aveiro",
   },
@@ -64,14 +64,14 @@ const STEPS = [
 
 const NUMBERS = [
   { v: "0 €", k: "O que paga à Qamar. Somos pagos pelo vendedor." },
-  { v: "90 %", k: "Financiamento máximo do banco, sobre o menor valor entre preço e avaliação." },
-  { v: "45 %", k: "Taxa de esforço máxima, testada com subida de juros." },
+  { v: "100 %", k: "Financiamento máximo do banco, sobre o menor valor entre preço e avaliação." },
+  { v: "50 %", k: "Taxa de esforço máxima, testada com subida de juros." },
   { v: "3 meses", k: "De acompanhamento depois da escritura." },
 ];
 
 const FAQS = [
   { q: "Pago alguma coisa à Qamar?", a: "Não. Somos pagos pelo vendedor, e dizemos-lho desde o início. A simulação de crédito, os renders personalizados e o dossier não têm custo para si." },
-  { q: "Porque pedem a simulação de crédito antes da visita?", a: "Porque o banco não financia pelo preço anunciado. Avalia pelo valor de transação e empresta, no máximo, 90% do menor valor entre o preço e a avaliação. Assim sabe, antes de se apaixonar por uma casa, quanto dinheiro precisa até à escritura e qual será a prestação." },
+  { q: "Porque pedem a simulação de crédito antes da visita?", a: "Porque o banco não financia pelo preço anunciado. Avalia pelo valor de transação e empresta, no máximo, 100% do menor valor entre o preço e a avaliação. Assim sabe, antes de se apaixonar por uma casa, quanto dinheiro precisa até à escritura e qual será a prestação." },
   { q: "Como entro na base de compradores?", a: "Diga-nos o que procura, em que zona e com que orçamento. Ajudamos com a simulação de crédito e, quando entra uma casa compatível, enviamos-lha antes de ir para os portais." },
   { q: "E se o banco avaliar a casa abaixo do preço?", a: "Os cenários de crédito mostram, antes do CPCV, quanto capital extra precisaria com a avaliação a 100, 95, 90 e 85%. E o CPCV leva condição de crédito aprovado até uma data: se o crédito falhar, o sinal é devolvido." },
   { q: "O orçamento de obra obriga-me a fazer a obra convosco?", a: "Não. Pode adjudicá-lo ou usá-lo só como referência para decidir." },
@@ -166,12 +166,12 @@ export function BuyPage() {
         <Btn href="#comecar" variant="ghost-dark">Começar aqui</Btn>
       </EditorialHero>
 
-      {/* Simulador de crédito completo, com as regras do Banco de Portugal */}
+      {/* Simulador de crédito completo */}
       <Section id="simulador" tone="grey">
         <SectionHead
           eyebrow="Simulador de crédito"
           title={<>Quanto pode comprar, ao euro.</>}
-          text="Prestação, TAEG, impostos, seguros e o dinheiro de que precisa até à escritura. Com as regras do Banco de Portugal que o banco vai usar."
+          text="Prestação, TAEG, impostos, seguros e o dinheiro de que precisa até à escritura. Com as regras que o banco vai usar."
         />
         <div className="mt-12 md:mt-16">
           <CreditSimulator onContinue={enterWithSim} />

@@ -120,7 +120,7 @@ const VARIANTS = {
       {
         id: "capital",
         question: "Quanto tem de capital próprio?",
-        subtext: "O banco financia no máximo 90% do menor valor entre o preço e a avaliação.",
+        subtext: "O banco financia no máximo 100% do menor valor entre o preço e a avaliação.",
         options: ["Menos de 10% do preço", "10% a 20% do preço", "Mais de 20% do preço", "Compro sem crédito"],
       },
       {

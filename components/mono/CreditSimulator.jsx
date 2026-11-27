@@ -5,15 +5,13 @@ import { SANS } from "./MonoHero";
 
 // Simulador de crédito à habitação (Portugal, continente), o mais perto possível
 // do que o banco vai calcular. Regras e valores à data de novembro de 2026:
-//  • Banco de Portugal (Recomendação macroprudencial 1/2026, desde 1 ago 2026):
-//    taxa de esforço máxima 45 %, testada com subida do indexante (+0,5 p.p. até 5 anos,
+//  • Taxa de esforço máxima 50 %, testada com subida do indexante (+0,5 p.p. até 5 anos,
 //    +1 p.p. até 10 anos, +1,5 p.p. acima de 10 anos) na taxa variável;
-//    financiamento até 90 % do menor valor entre preço e avaliação (80 % se não for
-//    habitação própria e permanente); prazo até 40 anos até aos 35 anos de idade e
+//    financiamento até 100 % do menor valor entre preço e avaliação (80 % se não for
+//    habitação própria e permanente) — valores definidos pela Qamar; prazo até 40 anos até aos 35 anos de idade e
 //    35 anos acima disso; se o crédito acabar depois dos 70 anos, o rendimento é cortado.
 //  • IMT 2026 (continente) e IMT Jovem (isenção até 330 539 €, parcial até 660 982 €).
 //  • Imposto do Selo: 0,8 % na compra, 0,6 % sobre o montante do crédito, 4 % sobre os juros.
-//  • Garantia pública para jovens até 35 anos: financiamento até 100 %.
 // Comissões, registos e seguros são médias de mercado; cada banco tem os seus valores.
 
 export const CREDIT_DEFAULTS = {
@@ -23,7 +21,7 @@ export const CREDIT_DEFAULTS = {
   fixa: 3.4,
 };
 
-const DSTI_MAX = 0.45;
+const DSTI_MAX = 0.5;
 
 // IMT 2026, continente
 const IMT_HPP = [
@@ -93,12 +91,11 @@ export function simularCredito(x) {
   const titulares = x.titulares === 2 ? 2 : 1;
   const idade = Math.max(18, Math.min(75, x.idade || 30));
   const jovem = x.hpp && x.primeira && idade <= 35;
-  const garantia = jovem && x.garantia;
 
   // quanto o banco empresta
   const avaliacao = preco * (x.avaliacao || 1);
   const baseBanco = Math.min(preco, avaliacao);
-  const ltvMax = garantia ? 1 : x.hpp ? 0.9 : 0.8;
+  const ltvMax = x.hpp ? 1 : 0.8;
   const maxLtv = baseBanco * ltvMax;
   const pedido = Math.max(0, preco - (x.entrada || 0));
   const montante = Math.min(pedido, maxLtv);
@@ -133,7 +130,7 @@ export function simularCredito(x) {
   const entradaReal = preco - montante;
   const dinheiro = entradaReal + custos;
 
-  // taxa de esforço (regra do Banco de Portugal)
+  // taxa de esforço (máximo 50 %, com teste de subida de juros)
   const choque = variavel ? (prazo > 10 ? 1.5 : prazo > 5 ? 1 : 0.5) : 0;
   const rS = (tan + choque) / 100 / 12;
   const prestacaoStress = pmt(montante, rS, n);
@@ -192,7 +189,7 @@ export function simularCredito(x) {
     variavel, tan, prestacao, seloJuros, vidaMes, multiMes, processamento, mensalTotal,
     imp, seloMutuo, avaliacaoBanco, comissoes, registos, custos, dinheiro,
     choque, prestacaoStress, corte, acima70, rendAjust, dsti, dstiReal, maxCredRend, precoMax,
-    anos, totalJuros, totalSeloJuros, totalSeguros, taxaAnual, mtic, cenarios, jovem, garantia,
+    anos, totalJuros, totalSeloJuros, totalSeguros, taxaAnual, mtic, cenarios, jovem,
     ltv: preco > 0 ? montante / baseBanco : 0,
   };
 }
@@ -323,7 +320,6 @@ export function CreditSimulator({ onContinue }) {
     fixa: CREDIT_DEFAULTS.fixa,
     hpp: true,
     primeira: true,
-    garantia: false,
     reformado: false,
   });
   const [plano, setPlano] = useState(false);
@@ -337,7 +333,6 @@ export function CreditSimulator({ onContinue }) {
 
   const r = useMemo(() => simularCredito(v), [v]);
   const ok = r.dsti <= DSTI_MAX && r.falta === 0;
-  const jovemPossivel = v.hpp && v.primeira && v.idade <= 35;
 
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16" style={{ fontFamily: SANS }}>
@@ -418,17 +413,6 @@ export function CreditSimulator({ onContinue }) {
           {v.hpp ? (
             <Choice label="É a primeira casa que compra?" value={v.primeira} onChange={set("primeira")} options={[[true, "Sim"], [false, "Não"]]} />
           ) : null}
-          {jovemPossivel ? (
-            <label className="flex cursor-pointer items-start gap-3 border border-neutral-300 bg-white p-4">
-              <input type="checkbox" checked={v.garantia} onChange={(e) => set("garantia")(e.target.checked)} className="mt-1 size-4 accent-[#0A0A0A]" />
-              <span>
-                <span className="block text-[14px] font-medium text-[#0A0A0A]">Usar a garantia pública para jovens</span>
-                <span className="mt-1 block text-[12px] leading-snug text-neutral-500">
-                  Até 35 anos, primeira casa e rendimento coletável até 86 634 € por ano: o banco pode financiar até 100 %.
-                </span>
-              </span>
-            </label>
-          ) : null}
           {r.acima70 > 0 ? (
             <label className="flex cursor-pointer items-start gap-3 border border-neutral-300 bg-white p-4">
               <input type="checkbox" checked={v.reformado} onChange={(e) => set("reformado")(e.target.checked)} className="mt-1 size-4 accent-[#0A0A0A]" />
@@ -452,8 +436,8 @@ export function CreditSimulator({ onContinue }) {
               {r.falta > 0
                 ? `Falta entrada: o banco empresta no máximo ${eur0(r.baseBanco * r.ltvMax)}. Precisa de mais ${eur0(r.falta)} de capital próprio.`
                 : r.dsti <= DSTI_MAX
-                  ? `Passa nas regras do Banco de Portugal: taxa de esforço de ${pct(r.dsti)} com o teste de subida de juros (máximo 45 %).`
-                  : `Não passa: com o teste de subida de juros, a taxa de esforço fica em ${pct(r.dsti)} (máximo 45 %). Baixe o preço, aumente a entrada ou o prazo.`}
+                  ? `Passa: taxa de esforço de ${pct(r.dsti)} com o teste de subida de juros (máximo 50 %).`
+                  : `Não passa: com o teste de subida de juros, a taxa de esforço fica em ${pct(r.dsti)} (máximo 50 %). Baixe o preço, aumente a entrada ou o prazo.`}
             </span>
           </div>
 
@@ -504,7 +488,7 @@ export function CreditSimulator({ onContinue }) {
               <Row k="Total até à escritura" v={eur0(r.dinheiro)} strong />
             </Block>
 
-            <Block title="Taxa de esforço (Banco de Portugal)">
+            <Block title="Taxa de esforço">
               <Row k="Hoje" v={pct(r.dstiReal)} sub="Prestação, seguros e outros créditos sobre o rendimento" />
               <Row
                 k="Com teste de subida de juros"
@@ -575,7 +559,7 @@ export function CreditSimulator({ onContinue }) {
           ) : null}
         </div>
         <p className="mt-4 text-[12px] leading-relaxed text-neutral-500">
-          Simulação indicativa, não é uma proposta de crédito. Usa as regras do Banco de Portugal em vigor desde 1 de agosto de 2026, as
+          Simulação indicativa, não é uma proposta de crédito. Usa taxa de esforço máxima de 50 % com teste de subida de juros, financiamento até 100 %, as
           tabelas de IMT de 2026 (continente) e médias de mercado para comissões, registos e seguros. A taxa variável é revista a cada 6
           meses; o plano assume a taxa de hoje até ao fim. A aprovação e as condições finais são sempre do banco.
         </p>
