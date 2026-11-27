@@ -7,14 +7,14 @@ import { FirstStep } from "./mono/Conversion";
 
 // Imagens do loader (rodam no centro enquanto o contador sobe)
 const LOADER_IMAGES = [
-  "/real/aveiro-moliceiros-cor.jpg",
-  "/real/aveiro-canal-azul.jpg",
-  "/real/costa-nova-ceu.jpg",
-  "/real/aveiro-canal-tarde.jpg",
-  "/real/aveiro-moliceiro.jpg",
+  "/intro/l1.jpg",
+  "/intro/l2.jpg",
+  "/intro/l3.jpg",
+  "/intro/l4.jpg",
+  "/intro/l5.jpg",
 ];
-const HERO_IMAGE = "/real/aveiro-canal-fachadas.jpg";
-const HERO_IMAGE_MOBILE = "/real/aveiro-canal-fachadas.jpg";
+const HERO_IMAGE = "/intro/hero.jpg";
+const HERO_IMAGE_MOBILE = "/intro/hero-mobile.jpg";
 
 // Tempos da entrada (ms)
 const T_LOGO = 1900; // contador chega a 100: a imagem sai e o logo aparece em grande
