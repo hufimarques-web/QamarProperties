@@ -237,22 +237,36 @@ export function MonoGrow() {
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden md:h-screen">
         <motion.div className="relative overflow-hidden" style={{ width: w, height: h, borderRadius: radius }}>
           <motion.img
-            src="/real/costa-nova.jpg"
-            alt="Casas às riscas da Costa Nova, Aveiro"
+            src="/real/defeito-infiltracao.jpg"
+            alt="Teto e parede com infiltração e estuque a cair"
             className="absolute inset-0 h-full w-full object-cover"
             style={{ scale: imgScale }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" />
+          {/* nota de relatório: o defeito escrito, como o comprador o recebe */}
+          <motion.div
+            className="absolute right-5 top-[calc(5.5rem+env(safe-area-inset-top))] w-[min(78vw,300px)] bg-white px-5 py-4 text-[#0A0A0A] shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:right-[6vw] md:top-[16vh]"
+            style={{ opacity: textOpacity, y: textY }}
+          >
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-500">Relatório da casa · Exemplo</p>
+            <p className="mt-2 text-[15px] font-medium leading-snug">Infiltração no teto da sala</p>
+            <div className="mt-3 flex items-baseline justify-between border-t border-neutral-200 pt-3 text-[13px]">
+              <span className="text-neutral-500">Reparação estimada</span>
+              <span className="font-medium tabular-nums">2 800 €</span>
+            </div>
+            <p className="mt-2 text-[12px] leading-snug text-neutral-500">Escrito e enviado ao comprador antes da visita.</p>
+          </motion.div>
           <motion.div className="absolute inset-x-0 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] px-5 text-white md:bottom-[12vh] md:px-[6vw]" style={{ opacity: textOpacity, y: textY }}>
-            <Eyebrow light>Para quem compra</Eyebrow>
+            <Eyebrow light>Transparência</Eyebrow>
             <h2 className="mt-4 max-w-3xl font-medium tracking-[-0.035em]" style={{ fontSize: "clamp(40px, 4.6vw, 80px)", lineHeight: 1.02 }}>
-              Cada casa com os motivos para não comprar.
+              Mostramos os defeitos antes da visita.
             </h2>
             <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-white/80 md:text-[17px]">
-              Renders à escala, orçamento de obra, cenários de crédito e relatório técnico. Por escrito, antes da visita.
+              Infiltrações, fissuras, obras por legalizar: o que encontrarmos na casa vai por escrito, com o custo de reparação. Ninguém
+              descobre nada na escritura.
             </p>
-            <Link href="/oportunidades" className="btn-lux btn-lux--solid-light mt-8">
-              Entrar na base de compradores
+            <Link href="/depoimentos" className="btn-lux btn-lux--solid-light mt-8">
+              Ver como trabalhamos
             </Link>
           </motion.div>
         </motion.div>
