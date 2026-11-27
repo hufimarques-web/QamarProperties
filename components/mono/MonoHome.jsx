@@ -99,13 +99,13 @@ export function MonoStatement() {
 
 // ── 2. Texto + grelha de desenhos (bento) ──
 const TILES = [
-  { src: "/projetos/fachada-principal.webp", label: "Fachada", cls: "col-span-2 row-span-2" },
-  { src: "/projetos/planta-tecnica.webp", label: "Planta técnica", cls: "" },
-  { src: "/projetos/sala-de-estar.webp", label: "Sala", cls: "row-span-2" },
-  { src: "/projetos/cozinha-open-space.webp", label: "Cozinha", cls: "" },
-  { src: "/projetos/planta-3d.webp", label: "Planta 3D", cls: "col-span-2" },
-  { src: "/projetos/exterior-traseiro-jardim.webp", label: "Jardim", cls: "" },
-  { src: "/projetos/quarto-suite-varanda.webp", label: "Suite", cls: "" },
+  { src: "/casas/fachada.jpg", label: "Fachada", cls: "col-span-2 row-span-2" },
+  { src: "/casas/pormenor.jpg", label: "Pormenor", cls: "" },
+  { src: "/casas/cozinha.jpg", label: "Cozinha", cls: "row-span-2" },
+  { src: "/casas/quarto.jpg", label: "Quarto", cls: "" },
+  { src: "/casas/sala.jpg", label: "Sala", cls: "col-span-2" },
+  { src: "/casas/casa-de-banho.jpg", label: "Casa de banho", cls: "" },
+  { src: "/casas/acabamentos.jpg", label: "Acabamentos", cls: "" },
 ];
 
 export function MonoGallery() {
@@ -151,7 +151,7 @@ export function MonoGallery() {
             </motion.figure>
           ))}
         </div>
-        <p className="mt-4 text-[12px] text-neutral-400">Renders e plantas de um projeto real em Aveiro.</p>
+        <p className="mt-4 text-[12px] text-neutral-400">Fotografia profissional de casas reais.</p>
       </div>
     </section>
   );
