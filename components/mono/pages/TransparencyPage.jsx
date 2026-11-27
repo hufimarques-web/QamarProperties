@@ -72,8 +72,8 @@ export function TransparencyPage() {
         label="Transparência"
         lines={["Tudo por escrito.", "Até os motivos", "para não comprar."]}
         text="Para quem vende e para quem compra: o que custa, quem nos paga e o que pode correr mal, antes de assinar."
-        image="/opt/p-escritorio.jpg"
-        imageAlt="Escritório com biblioteca e plantas da casa sobre a secretária"
+        image="/real/aveiro-azulejos.jpg"
+        imageAlt="Fachada de azulejos em Aveiro"
       />
 
       {/* Frase que se acende */}
@@ -179,7 +179,7 @@ export function TransparencyPage() {
         eyebrow="Tudo por escrito"
         title="Comprar ou vender com tudo por escrito."
         text="Quem vende sabe quanto recebe antes de assinar. Quem compra sabe quanto paga, e porque não deve comprar, antes do CPCV."
-        image="/opt/p-noite2.jpg"
+        image="/real/apt-quarto-2.jpg"
       >
         <Btn onClick={openSeller} variant="solid-light">Vender a minha casa</Btn>
         <Btn onClick={openBuyer} variant="ghost-light">Quero comprar</Btn>

@@ -84,8 +84,8 @@ export function TeamPage() {
 
       {/* Imagem que cresce até ao ecrã inteiro (Stillform) */}
       <ExpandImage
-        src="/opt/p-fachada.jpg"
-        alt="Fachada clássica numa rua arborizada ao fim do dia"
+        src="/real/costa-nova.jpg"
+        alt="Casas às riscas da Costa Nova"
         title={<>Dois<br />lados</>}
         caption={
           <p className="max-w-3xl font-medium leading-[1.08] tracking-[-0.025em]" style={{ fontSize: "clamp(38px, 5vw, 88px)" }}>

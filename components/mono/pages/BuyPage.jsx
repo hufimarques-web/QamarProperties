@@ -25,9 +25,9 @@ const VALUES = [
 ];
 
 const DEALS = [
-  { title: "Apartamentos", zone: "Aveiro centro", type: "T1 a T3", image: "/opt/p-sala.jpg" },
-  { title: "Moradias", zone: "Esgueira / Aradas / Glória e Vera Cruz", type: "T2 a T4", image: "/opt/p-cozinha.jpg" },
-  { title: "Apartamentos e moradias", zone: "Ílhavo / Gafanhas", type: "Até 400.000 €", image: "/opt/p-noite2.jpg" },
+  { title: "Apartamentos", zone: "Aveiro centro", type: "T1 a T3", image: "/real/apt-quarto-janela.jpg" },
+  { title: "Moradias", zone: "Esgueira / Aradas / Glória e Vera Cruz", type: "T2 a T4", image: "/real/apt-cozinha-mesa.jpg" },
+  { title: "Apartamentos e moradias", zone: "Ílhavo / Gafanhas", type: "Até 400.000 €", image: "/real/apt-quarto-2.jpg" },
 ];
 
 const STEPS = [
@@ -35,29 +35,29 @@ const STEPS = [
     label: "Crédito primeiro",
     title: "Sabe quanto pode comprar antes de visitar.",
     text: "Simulamos o seu crédito com as regras do Banco de Portugal: taxa de esforço máxima de 45%, testada com subida de juros, e financiamento até 90%. Vê o dinheiro de que precisa até à escritura, a prestação e a reserva que lhe sobra. Os casos mais apertados são confirmados pelo nosso intermediário de crédito parceiro.",
-    image: "/opt/p-escritorio.jpg",
-    alt: "Secretária com plantas e chaves, junto a uma janela",
+    image: "/real/aveiro-azulejos.jpg",
+    alt: "Fachada de azulejos em Aveiro",
   },
   {
     label: "Base de compradores",
     title: "Recebe as casas compatíveis primeiro.",
     text: "Quando entra uma casa que encaixa no que procura e no que pode pagar, recebe-a antes de ir para os portais. Fotos reais primeiro, renders sempre ao lado e identificados como simulação.",
-    image: "/opt/p-dia.jpg",
-    alt: "Sala de estar e jantar com janelas altas",
+    image: "/real/aveiro-moliceiro.jpg",
+    alt: "Moliceiro no canal de Aveiro",
   },
   {
     label: "Dossier da casa",
     title: "A casa como a quer, com números reais.",
     text: "Depois da visita, e com interesse claro, preparamos o dossier: renders com 2 ou 3 usos do espaço e os seus móveis, orçamento de obra com âmbito e prazo, cenários de crédito, relatório técnico e documentos do condomínio.",
-    image: "/opt/valorizar.jpg",
-    alt: "Materiais e planta da obra sobre a mesa",
+    image: "/real/apt-quarto.jpg",
+    alt: "Quarto de um apartamento renovado",
   },
   {
     label: "Proposta e CPCV",
     title: "Propostas com data, sem concorrência inventada.",
     text: "Com 5 ou mais interessados, abrimos uma janela de propostas com data limite. Cada proposta fica registada com data e validade. O CPCV leva sinal de 5 a 10% e condição de crédito aprovado: se o crédito falhar, o sinal é devolvido.",
-    image: "/opt/vender.jpg",
-    alt: "Entrega das chaves de uma casa",
+    image: "/real/costa-nova-ceu.jpg",
+    alt: "Casas às riscas da Costa Nova",
   },
 ];
 
@@ -149,8 +149,8 @@ export function BuyPage() {
         label="Para quem compra"
         lines={["A casa antes", "dos portais."]}
         text="Casas na Região de Aveiro com renders à escala, orçamento de obra, cenários de crédito e relatório técnico. E, em cada casa, os motivos para não comprar, por escrito."
-        image="/opt/p-sala.jpg"
-        imageAlt="Sala de um apartamento clássico recuperado"
+        image="/real/apt-quarto-janela.jpg"
+        imageAlt="Quarto com janela grande"
       >
         <Btn onClick={openBuyer}>Simular crédito</Btn>
         <Btn href="#comecar" variant="ghost-dark">Começar aqui</Btn>
@@ -158,8 +158,8 @@ export function BuyPage() {
 
       {/* Moldura ameixa que se abre até ao ecrã inteiro (ERA Residence) */}
       <ExpandImage
-        src="/opt/p-dia.jpg"
-        alt="Sala de estar e jantar de um apartamento clássico recuperado"
+        src="/real/aveiro-moliceiro.jpg"
+        alt="Moliceiro no canal de Aveiro, frente às fachadas"
         title={<>Antes dos<br />portais</>}
         caption={
           <p className="max-w-3xl font-medium leading-[1.08] tracking-[-0.025em]" style={{ fontSize: "clamp(38px, 5vw, 88px)" }}>
@@ -206,7 +206,7 @@ export function BuyPage() {
           </div>
         }
       >
-        {[...DEALS, { title: "A sua próxima casa", zone: "Diga-nos o que procura", type: "Entrar na base", image: "/opt/p-fachada.jpg", open: true }].map((d) => (
+        {[...DEALS, { title: "A sua próxima casa", zone: "Diga-nos o que procura", type: "Entrar na base", image: "/real/costa-nova.jpg", open: true }].map((d) => (
           <button key={d.title} type="button" onClick={openBuyer} className="group w-[70vw] shrink-0 text-left md:w-[24vw]">
             <div className="relative aspect-[3/4] overflow-hidden rounded-[3px] bg-neutral-100">
               <img
@@ -259,7 +259,7 @@ export function BuyPage() {
             </div>
           </motion.div>
           <motion.div className="md:col-span-5 md:col-start-8" {...fadeUp(0.1)}>
-            <ArchImage src="/opt/p-escritorio.jpg" className="aspect-[4/5] w-full" />
+            <ArchImage src="/real/aveiro-azulejos.jpg" className="aspect-[4/5] w-full" />
           </motion.div>
         </div>
       </Section>
@@ -270,7 +270,7 @@ export function BuyPage() {
         eyebrow="Para quem compra"
         title="Entre na base de compradores."
         text="Diga-nos o que procura e quanto pode investir. Ajudamos com a simulação de crédito e enviamos-lhe as casas compatíveis antes de chegarem aos portais."
-        image="/opt/p-noite.jpg"
+        image="/real/aveiro-canal-dourado.jpg"
       >
         <Btn onClick={openBuyer} variant="solid-light">Simular crédito</Btn>
         <Btn href="/oportunidade" variant="ghost-light">Ver um dossier</Btn>

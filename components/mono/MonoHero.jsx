@@ -15,10 +15,10 @@ export const SANS = "Inter, system-ui, -apple-system, sans-serif";
 const EASE = [0.16, 1, 0.3, 1];
 
 const SIDES = [
-  { src: "/opt/c-valor.jpg", alt: "Fachada Arte Nova com azulejos junto ao canal de Aveiro", x: -2, from: 0.3 },
-  { src: "/opt/m-valorizar.jpg", alt: "Sala renovada com vista para a ria", x: -1, from: 0.24 },
-  { src: "/opt/p-sala.jpg", alt: "Sala de um apartamento clássico recuperado, com janelas altas", x: 1, from: 0.24 },
-  { src: "/mono/hero-dusk.jpg", alt: "Casa junto ao canal ao anoitecer", x: 2, from: 0.3 },
+  { src: "/real/aveiro-azulejos.jpg", alt: "Fachada de azulejos em Aveiro", x: -2, from: 0.3 },
+  { src: "/real/apt-sala-mesa.jpg", alt: "Sala com mesa de refeições", x: -1, from: 0.24 },
+  { src: "/real/apt-quarto-janela.jpg", alt: "Quarto com janela grande", x: 1, from: 0.24 },
+  { src: "/real/aveiro-canal-tarde.jpg", alt: "Canal de Aveiro ao fim da tarde", x: 2, from: 0.3 },
 ];
 
 // largura da coluna e espaço entre colunas (vw): computador / telemóvel
@@ -47,7 +47,6 @@ const LOGO_INK = { left: 6 / 836, right: 511 / 836, cap: 16 / 144, base: 103 / 1
 const SERIF = "'Cormorant Garamond', Georgia, serif";
 const SPACING = 0.012; // em (igual ao logótipo)
 const FLY_END = 0.2; // parte do scroll do topo em que a palavra viaja até à barra
-const REST = 0.002; // em repouso a palavra está dentro da cena, atrás da casa
 
 // medidas da letra (canvas): lados do Q e do R, altura das maiúsculas, ascendente/descendente
 function fontMetrics(size) {
@@ -94,7 +93,7 @@ function FlyingWord({ p, ready }) {
 
     // a palavra só existe no topo; no fim entrega o lugar ao logótipo
     // em repouso mostra-se a cópia de dentro da cena (atrás da casa); ao fazer scroll, esta voa
-    fly.style.opacity = v <= REST ? "0" : String(t < 0.9 ? 1 : Math.max(0, 1 - (t - 0.9) / 0.1));
+    fly.style.opacity = String(t < 0.9 ? 1 : Math.max(0, 1 - (t - 0.9) / 0.1));
     if (logo) {
       logo.style.transition = "none";
       logo.style.opacity = String(t < 0.85 ? 0 : (t - 0.85) / 0.15);
@@ -221,8 +220,6 @@ export function MonoHero({ ready = true }) {
   const stripY = useTransform(p, [0.6, 1], ["0%", "-6%"]);
   // telemóvel: escurece enquanto a secção seguinte sobe por cima (cascata)
   const cascadeShade = useTransform(p, [0.55, 1], [0, 0.6]);
-  // QAMAR em repouso, atrás da casa (passa a palavra que voa assim que começa o scroll)
-  const restOpacity = useTransform(p, (v) => (v <= REST ? 1 : 0));
 
   return (
     <section ref={ref} id="hero-desktop" data-hide-cta data-scene data-scene-duration="2.2" className="mono-root relative h-[320svh] bg-white md:h-[260vh]" style={{ fontFamily: SANS }}>
@@ -242,40 +239,16 @@ export function MonoHero({ ready = true }) {
               transition={{ duration: 2.6, ease: [0.22, 1, 0.36, 1] }}
             >
             <motion.div className="absolute inset-0" style={{ scale: zoom, transformOrigin: "50% 44%" }}>
-              {/* QAMAR em repouso, atrás da casa: no mesmo sítio da palavra que voa */}
-              <motion.div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 top-[24svh] flex justify-center md:top-[11vh]"
-                style={{ opacity: restOpacity }}
-              >
-                <motion.span
-                  className="block select-none whitespace-nowrap font-light leading-[0.8] text-[#111]"
-                  style={{
-                    fontFamily: SERIF,
-                    fontSize: "25.3vw",
-                    letterSpacing: `${SPACING}em`,
-                    paddingLeft: `${SPACING}em`,
-                    fontFeatureSettings: "'calt' 1, 'liga' 1",
-                  }}
-                  initial={{ y: "18%", opacity: 0 }}
-                  animate={ready ? { y: "0%", opacity: 1 } : { y: "18%", opacity: 0 }}
-                  transition={{ duration: 1.4, ease: EASE, delay: 0.9 }}
-                >
-                  QAMAR
-                </motion.span>
-              </motion.div>
-              {/* Casa recortada (céu transparente).
-                  No telemóvel fica mais alta e centrada (corta os lados). */}
-              <div className="absolute bottom-0 left-1/2 aspect-video h-[66svh] -translate-x-1/2 md:left-0 md:h-auto md:w-full md:translate-x-0">
-                <motion.img
-                  src="/mono/hero-cut.webp"
-                  alt="Casa tradicional com azulejos junto a um canal de Aveiro"
-                  className="h-full w-full object-cover"
-                  initial={{ scale: 1.08, opacity: 0 }}
-                  animate={ready ? { scale: 1, opacity: 1 } : { scale: 1.08, opacity: 0 }}
-                  transition={{ duration: 1.8, ease: EASE, delay: 0.1 }}
-                />
-              </div>
+              {/* Foto real de Aveiro a ocupar a cena; véu branco em cima para o QAMAR se ler sobre o céu */}
+              <motion.img
+                src="/real/aveiro-canal-fachadas.jpg"
+                alt="Canal de Aveiro com fachadas Arte Nova e moliceiros"
+                className="absolute inset-0 h-full w-full object-cover"
+                initial={{ scale: 1.08, opacity: 0 }}
+                animate={ready ? { scale: 1, opacity: 1 } : { scale: 1.08, opacity: 0 }}
+                transition={{ duration: 1.8, ease: EASE, delay: 0.1 }}
+              />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-white via-white/70 to-transparent" />
             </motion.div>
             </motion.div>
             </div>

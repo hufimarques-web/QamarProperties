@@ -10,7 +10,7 @@ import { SANS } from "../MonoHero";
 
 // /oportunidade — o dossier da casa.
 // Estrutura de uma página de imóvel premium (Sotheby's, Compass):
-// título + barra de factos → galeria com separadores (Fotos / Renders / Planta) →
+// título + barra de factos → galeria com separadores (Interior / Exterior / Zona) →
 // conteúdo à esquerda com painel de contacto preso à direita → cenários de crédito em tabela →
 // estado de cada informação → proteção → chamada final → perguntas.
 
@@ -23,20 +23,20 @@ const FACTS = [
 ];
 
 const GALLERY = {
-  Fotos: [
-    { src: "/opt/p-sala2.jpg", alt: "Fotografia da sala" },
-    { src: "/opt/p-cozinha.jpg", alt: "Fotografia da cozinha" },
-    { src: "/opt/p-dia.jpg", alt: "Fotografia da sala de jantar" },
+  Interior: [
+    { src: "/real/apt-sala.jpg", alt: "Sala de um apartamento renovado" },
+    { src: "/real/apt-cozinha-mesa.jpg", alt: "Cozinha com mesa de refeições" },
+    { src: "/real/apt-quarto-janela.jpg", alt: "Quarto com janela grande" },
   ],
-  Renders: [
-    { src: "/mono/sk-sala.jpg", alt: "Render da sala, identificado como simulação" },
-    { src: "/mono/sk-cozinha.jpg", alt: "Render da cozinha, identificado como simulação" },
-    { src: "/opt/valorizar.jpg", alt: "Materiais e planta 3D" },
+  Exterior: [
+    { src: "/real/aveiro-azulejos.jpg", alt: "Fachada de azulejos em Aveiro" },
+    { src: "/real/costa-nova.jpg", alt: "Casas às riscas da Costa Nova" },
+    { src: "/real/aveiro-canal-fachadas.jpg", alt: "Fachadas junto ao canal de Aveiro" },
   ],
-  Planta: [
-    { src: "/mono/sk-planta.jpg", alt: "Planta da casa" },
-    { src: "/mono/sk-corte.jpg", alt: "Corte da casa" },
-    { src: "/mono/sk-fachada.jpg", alt: "Alçado da fachada" },
+  Zona: [
+    { src: "/real/aveiro-canal-tarde.jpg", alt: "Canal de Aveiro ao fim da tarde" },
+    { src: "/real/aveiro-moliceiros.jpg", alt: "Moliceiros no canal central" },
+    { src: "/real/aveiro-canal-azul.jpg", alt: "Canal de Aveiro e casas coloridas" },
   ],
 };
 
@@ -57,10 +57,10 @@ const SCENARIOS = [100, 95, 90, 85].map((pct) => {
 });
 
 const STATES = [
-  { h: "Comprovada", d: "Confirmada com documento: caderneta, certidão, licença, atas do condomínio.", ex: "Área da caderneta", img: "/opt/p-escritorio.jpg" },
-  { h: "Declarada", d: "Dita pelo dono, ainda sem documento que a confirme.", ex: "Ano das últimas obras", img: "/opt/p-sala.jpg" },
-  { h: "Estimada", d: "Calculada por nós ou pelos parceiros, como o orçamento de obra ou os cenários de crédito.", ex: "Orçamento da cozinha", img: "/opt/p-cozinha.jpg" },
-  { h: "Desconhecida", d: "Ainda não sabemos. Fica escrito, para não ser surpresa.", ex: "Estado da canalização interior", img: "/opt/p-noite2.jpg" },
+  { h: "Comprovada", d: "Confirmada com documento: caderneta, certidão, licença, atas do condomínio.", ex: "Área da caderneta", img: "/real/aveiro-azulejos.jpg" },
+  { h: "Declarada", d: "Dita pelo dono, ainda sem documento que a confirme.", ex: "Ano das últimas obras", img: "/real/apt-quarto-janela.jpg" },
+  { h: "Estimada", d: "Calculada por nós ou pelos parceiros, como o orçamento de obra ou os cenários de crédito.", ex: "Orçamento da cozinha", img: "/real/apt-cozinha-mesa.jpg" },
+  { h: "Desconhecida", d: "Ainda não sabemos. Fica escrito, para não ser surpresa.", ex: "Estado da canalização interior", img: "/real/apt-quarto-2.jpg" },
 ];
 
 const PROTECTION = [
@@ -109,9 +109,6 @@ function Gallery() {
           {imgs.map((im, i) => (
             <figure key={im.src} className={`relative overflow-hidden rounded-[3px] bg-neutral-100 ${i === 0 ? "col-span-2 row-span-1 md:row-span-2" : ""}`}>
               <img src={im.src} alt={im.alt} className="h-full w-full object-cover" />
-              {tab === "Renders" && (
-                <figcaption className="absolute bottom-3 left-3 bg-white/85 px-2.5 py-1 text-[11px] font-medium text-neutral-700 backdrop-blur">Simulação</figcaption>
-              )}
             </figure>
           ))}
         </motion.div>
@@ -318,7 +315,7 @@ export function DossierPage() {
         eyebrow="Para quem compra"
         title="Quer receber o próximo dossier?"
         text="Simule o crédito e entre na base. As casas compatíveis chegam-lhe antes de irem para os portais."
-        image="/opt/p-noite.jpg"
+        image="/real/aveiro-canal-dourado.jpg"
       >
         <Btn onClick={openBuyer} variant="solid-light">Simular crédito</Btn>
         <Btn href="/oportunidades" variant="ghost-light">Como compra connosco</Btn>
