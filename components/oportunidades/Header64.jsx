@@ -16,7 +16,7 @@ export function Header64() {
             color: GOLD,
           }}
         >
-          Painel de Negócios
+          Para quem compra
         </span>
         <h1
           className="text-5xl md:text-6xl lg:text-7xl font-light leading-[1.1] tracking-tight mb-6"
@@ -25,9 +25,9 @@ export function Header64() {
             color: NAVY,
           }}
         >
-          Oportunidades{" "}
+          A casa{" "}
           <span className="italic" style={{ color: `${NAVY}BB` }}>
-            sob medida.
+            como a quer.
           </span>
         </h1>
         <p
@@ -37,7 +37,7 @@ export function Header64() {
             color: `${NAVY}80`,
           }}
         >
-          Operações de Fix & Flip em Aveiro com ROI transparente, proteção legal e prazos definidos. Parametrizadas exclusivamente pelo seu perfil de investidor.
+          Casas na Região de Aveiro com renders à escala, orçamento de obra, cenários de crédito e relatório técnico. E, em cada casa, os motivos para não comprar, por escrito.
         </p>
       </div>
     </section>

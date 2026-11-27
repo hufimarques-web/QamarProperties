@@ -66,9 +66,9 @@ export function Layout394() {
               style={{ width: sideWidth, x: leftX, opacity: sideOpacity }}
             >
               <img 
-                alt="Left view" 
+                alt="Pormenor de acabamento" 
                 className="absolute inset-0 w-full h-full object-cover" 
-                src="/algoritmo/Close_up_of_premium_-382650.png" 
+                src="/opt/closeup.jpg" 
               />
             </motion.div>
 
@@ -78,16 +78,16 @@ export function Layout394() {
               style={{ width: centerWidth }}
             >
               <motion.img 
-                alt="Aveiro Renovation Stage" 
+                alt="Casa antes da valorização" 
                 className="absolute inset-0 w-full h-full object-cover" 
                 style={{ opacity: img1Opacity }} 
-                src="/algoritmo/algo-1.png" 
+                src="/opt/obra-janela.jpg" 
               />
               <motion.img 
-                alt="Investment ROI Dashboard" 
+                alt="Render da casa valorizada" 
                 className="absolute inset-0 w-full h-full object-cover" 
                 style={{ opacity: img4Opacity }} 
-                src="/algoritmo/algo-4.png" 
+                src="/opt/sala-render.jpg" 
               />
 
               <div className="absolute inset-0 bg-black/40"></div>
@@ -99,9 +99,9 @@ export function Layout394() {
               style={{ width: sideWidth, x: rightX, opacity: sideOpacity }}
             >
               <img 
-                alt="Right view" 
+                alt="Interior renovado" 
                 className="absolute inset-0 w-full h-full object-cover" 
-                src="/algoritmo/Interior_of_a_finish-382651.png" 
+                src="/opt/sala-ria.jpg" 
               />
             </motion.div>
 
@@ -109,31 +109,31 @@ export function Layout394() {
 
           {/* Text Overlay - Movido para fora dos painéis para não sofrer redimensionamento */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-20 pointer-events-none">
-            <h2 className="absolute w-full font-medium leading-[1.1] tracking-tight text-white text-5xl md:text-7xl lg:text-[6.5rem] font-sans">
+            <h2 className="absolute w-full font-medium leading-[1.1] tracking-tight text-white text-[2.6rem] md:text-7xl lg:text-[6.5rem] font-sans">
               <span className="block">
-                <TitleWord progress={scrollYProgress} inRange={[0.0, 0.05]} outRange={[0.45, 0.5]}>Conhecimento</TitleWord>
+                <TitleWord progress={scrollYProgress} inRange={[0.0, 0.05]} outRange={[0.45, 0.5]}>Valor</TitleWord>
                 <TitleWord progress={scrollYProgress} inRange={[0.05, 0.10]} outRange={[0.45, 0.5]}>&amp;</TitleWord>
               </span>
               <span className="block">
-                <TitleWord progress={scrollYProgress} inRange={[0.10, 0.15]} outRange={[0.45, 0.5]}>Antecipação.</TitleWord>
+                <TitleWord progress={scrollYProgress} inRange={[0.10, 0.15]} outRange={[0.45, 0.5]}>Prazo.</TitleWord>
               </span>
             </h2>
-            <h2 className="absolute w-full font-medium leading-[1.1] tracking-tight text-white text-5xl md:text-7xl lg:text-[6.5rem] font-sans">
+            <h2 className="absolute w-full font-medium leading-[1.1] tracking-tight text-white text-[2.6rem] md:text-7xl lg:text-[6.5rem] font-sans">
               <span className="block">
-                <TitleWord progress={scrollYProgress} inRange={[0.5, 0.55]} outRange={[0.75, 0.8]}>Algoritmo</TitleWord>
+                <TitleWord progress={scrollYProgress} inRange={[0.5, 0.55]} outRange={[0.75, 0.8]}>Fotos</TitleWord>
                 <TitleWord progress={scrollYProgress} inRange={[0.55, 0.6]} outRange={[0.75, 0.8]}>&amp;</TitleWord>
               </span>
               <span className="block">
-                <TitleWord progress={scrollYProgress} inRange={[0.6, 0.65]} outRange={[0.75, 0.8]}>Estilo.</TitleWord>
+                <TitleWord progress={scrollYProgress} inRange={[0.6, 0.65]} outRange={[0.75, 0.8]}>Renders.</TitleWord>
               </span>
             </h2>
-            <h2 className="absolute w-full font-medium leading-[1.1] tracking-tight text-white text-5xl md:text-7xl lg:text-[6.5rem] font-sans">
+            <h2 className="absolute w-full font-medium leading-[1.1] tracking-tight text-white text-[2.6rem] md:text-7xl lg:text-[6.5rem] font-sans">
               <span className="block">
-                <TitleWord progress={scrollYProgress} inRange={[0.8, 0.85]} outRange={[0.95, 1]}>Sinais</TitleWord>
+                <TitleWord progress={scrollYProgress} inRange={[0.8, 0.85]} outRange={[0.95, 1]}>Propostas</TitleWord>
                 <TitleWord progress={scrollYProgress} inRange={[0.85, 0.9]} outRange={[0.95, 1]}>&amp;</TitleWord>
               </span>
               <span className="block">
-                <TitleWord progress={scrollYProgress} inRange={[0.9, 0.95]} outRange={[0.95, 1]}>Retorno.</TitleWord>
+                <TitleWord progress={scrollYProgress} inRange={[0.9, 0.95]} outRange={[0.95, 1]}>Escritura.</TitleWord>
               </span>
             </h2>
           </div>
@@ -147,7 +147,7 @@ export function Layout394() {
       </div>
       
       {/* Spacer para garantir o scroll da secção cinemática */}
-      <div className="h-[400vh]"></div>
+      <div className="h-[220vh] md:h-[400vh]"></div>
     </section>
     </div>
   );

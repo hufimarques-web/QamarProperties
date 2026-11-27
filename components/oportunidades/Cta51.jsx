@@ -25,7 +25,7 @@ export function Cta51() {
                 color: GOLD,
               }}
             >
-              Começar Agora
+              Para quem compra
             </span>
             <h2
               className="text-4xl md:text-5xl font-light leading-[1.1] tracking-tight mb-6"
@@ -34,9 +34,9 @@ export function Cta51() {
                 color: NAVY,
               }}
             >
-              Defina a sua estratégia e ative o{" "}
+              Entre na base de{" "}
               <span className="italic" style={{ color: `${NAVY}BB` }}>
-                algoritmo.
+                compradores.
               </span>
             </h2>
             <p
@@ -46,28 +46,12 @@ export function Cta51() {
                 color: `${NAVY}80`,
               }}
             >
-              Configure o seu orçamento, padrão de acabamento e ROI desejado. O FLIX começará a monitorizar o mercado 24/7 e a enviar sinais de lucro 100% personalizados para si.
+              Diga-nos o que procura e quanto pode investir. Ajudamos com a simulação de crédito e enviamos-lhe as casas compatíveis antes de chegarem aos portais. Somos pagos pelo vendedor: a si não cobramos nada.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="/#formulario"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300"
-              style={{
-                fontFamily: "'Outfit', system-ui, sans-serif",
-                background: NAVY,
-                color: "#F5F2ED",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = GOLD;
-                e.currentTarget.style.color = NAVY;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = NAVY;
-                e.currentTarget.style.color = "#F5F2ED";
-              }}
-            >
-              Configurar Sinais
+            <a href="#formulario-comprador" className="btn-lux btn-lux--solid-dark btn-lux--block-mobile">
+              Simular crédito
             </a>
           </div>
         </div>

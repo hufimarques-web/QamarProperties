@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const textRevealContent =
-  "Dominamos os custos de obra em Aveiro para que nunca invista às cegas. O nosso software cruza os seus materiais favoritos e o seu padrão de acabamento com oportunidades reais de mercado. Através de cálculos de ARV e custos de renovação estimados, enviamos sinais de lucro precisos. Se o potencial for 10%, o sinal é fraco. Aos 25%, o negócio é bom. Acima de 30%, é uma oportunidade rara que o nosso algoritmo entrega direto na sua caixa de entrada, garantindo que o seu Fix & Flip seja tão transparente quanto lucrativo.";
+  "Diga-nos quanto quer receber na carteira. Antes disso, mostramos-lhe o estudo de mercado: o valor a que casas como a sua se vendem de facto, o valor a que se anunciam e quanto lhe ficaria com uma imobiliária comum. Depois vendemos em 60 dias. Se vendermos pelo seu valor, ganhamos zero. O que conseguirmos acima é a nossa remuneração. Se não vendermos, saímos e fica com as fotos e os renders.";
 
 const words = textRevealContent.split(" ");
 
@@ -30,7 +30,7 @@ export function Manifesto() {
   return (
     <section
       ref={textRef}
-      className="relative overflow-hidden px-6 pt-24 pb-40 md:px-12 md:pt-32 md:pb-56 lg:px-20 lg:pt-40 lg:pb-72 min-h-screen flex items-center"
+      className="relative overflow-hidden px-6 pt-20 pb-24 md:px-12 md:pt-32 md:pb-56 lg:px-20 lg:pt-40 lg:pb-72 min-h-[80vh] md:min-h-screen flex items-center"
       style={{
         position: "relative",
         zIndex: 20,
@@ -38,7 +38,7 @@ export function Manifesto() {
     >
 
       <div className="relative mx-auto max-w-4xl" style={{ zIndex: 2 }}>
-        <p className="text-3xl font-semibold leading-snug text-[#1a1a2e] md:text-4xl lg:text-5xl">
+        <p className="text-[1.6rem] font-semibold leading-snug text-[#1a1a2e] md:text-4xl lg:text-5xl">
           {words.map((word, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;

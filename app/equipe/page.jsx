@@ -1,17 +1,19 @@
 import { Navbar14 } from "@/components/shared/Navbar14";
-import { Header64 } from "@/components/equipe/Header64";
-import { Logo6 } from "@/components/equipe/Logo6";
-import { Contact15 } from "@/components/equipe/Contact15";
-import { Footer3 } from "@/components/shared/Footer3";
+import { TeamPage } from "@/components/mono/pages/TeamPage";
+
+export const metadata = {
+  title: "Equipa e contacto",
+  description: "Fale com a Qamar Properties: venda e compra de casas na Região de Aveiro. Telefone, WhatsApp e parceiros (obras, crédito, advogado e engenheiro).",
+  alternates: { canonical: "/equipe" },
+  openGraph: { title: "Equipa e contacto | Qamar Properties", description: "Fale com a Qamar Properties: venda e compra de casas na Região de Aveiro. Telefone, WhatsApp e parceiros (obras, crédito, advogado e engenheiro).", url: "/equipe" },
+};
+
 
 export default function Page() {
   return (
     <div>
       <Navbar14 />
-      <Header64 />
-      <Logo6 />
-      <Contact15 />
-      <Footer3 />
+      <TeamPage />
     </div>
   );
 }

@@ -1,96 +1,33 @@
 "use client";
 
-import { Button } from "@relume_io/relume-ui";
 import React from "react";
-import { RxChevronRight } from "react-icons/rx";
+
+const cards = [
+  { title: "Sinal no CPCV", text: "Entre 5% e 10% do preço." },
+  { title: "Condição de crédito", text: "Se o crédito falhar até à data acordada, o sinal é devolvido." },
+  { title: "Depois da escritura", text: "3 meses de acompanhamento: obras, despesas e problemas escondidos." },
+];
 
 export function Layout396() {
   return (
     <section id="relume" className="px-[5%] py-16 md:py-24 lg:py-28">
       <div className="container">
         <div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
-          <p className="mb-3 font-semibold md:mb-4">Números</p>
-          <h1 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
-            Métricas do investimento
-          </h1>
-          <p className="md:text-md">Veja exatamente o que esperar</p>
+          <p className="mb-3 font-semibold md:mb-4">Proteção</p>
+          <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
+            Compra com rede
+          </h2>
+          <p className="md:text-md">O que fica escrito quando avança.</p>
         </div>
         <div className="grid auto-cols-fr grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3">
-          <div className="flex flex-col justify-center border border-border-primary p-6 md:p-8">
-            <div>
-              <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo 1"
-                />
-              </div>
-              <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Retorno projetado
-              </h2>
-              <p>22% líquido em nove meses</p>
+          {cards.map(({ title, text }) => (
+            <div key={title} className="flex flex-col justify-center border border-border-primary p-6 md:p-8">
+              <h3 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
+                {title}
+              </h3>
+              <p>{text}</p>
             </div>
-            <div className="mt-5 md:mt-6">
-              <Button
-                title="Detalhes"
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
-              >
-                Detalhes
-              </Button>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center border border-border-primary p-6 md:p-8">
-            <div>
-              <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo 1"
-                />
-              </div>
-              <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Investimento mínimo
-              </h2>
-              <p>€10.000 para começar</p>
-            </div>
-            <div className="mt-5 md:mt-6">
-              <Button
-                title="Detalhes"
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
-              >
-                Detalhes
-              </Button>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center border border-border-primary p-6 md:p-8">
-            <div>
-              <div className="rb-5 mb-5 md:mb-6">
-                <img
-                  src="https://d22po4pjz3o32e.cloudfront.net/relume-icon.svg"
-                  className="size-12"
-                  alt="Relume logo 1"
-                />
-              </div>
-              <h2 className="mb-3 text-2xl font-bold md:mb-4 md:text-3xl md:leading-[1.3] lg:text-4xl">
-                Cronograma
-              </h2>
-              <p>Nove meses até a venda</p>
-            </div>
-            <div className="mt-5 md:mt-6">
-              <Button
-                title="Detalhes"
-                variant="link"
-                size="link"
-                iconRight={<RxChevronRight />}
-              >
-                Detalhes
-              </Button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

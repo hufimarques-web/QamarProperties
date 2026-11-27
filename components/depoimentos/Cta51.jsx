@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@relume_io/relume-ui";
+import Link from "next/link";
 import React from "react";
 
 export function Cta51() {
@@ -10,18 +11,22 @@ export function Cta51() {
         <div className="flex flex-col items-center border border-border-primary p-8 md:p-12 lg:p-16">
           <div className="max-w-lg text-center">
             <h2 className="rb-5 mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
-              Medium length heading goes here
+              Comprar ou vender com tudo por escrito
             </h2>
             <p className="md:text-md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique.
+              Quem vende sabe quanto recebe antes de assinar. Quem compra sabe
+              quanto paga, e porque não deve comprar, antes do CPCV.
             </p>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:mt-8">
-            <Button title="Button">Button</Button>
-            <Button title="Button" variant="secondary">
-              Button
-            </Button>
+            <Link href="/#formulario">
+              <Button title="Vender a minha casa">Vender a minha casa</Button>
+            </Link>
+            <Link href="/oportunidades#formulario-comprador">
+              <Button title="Quero comprar" variant="secondary">
+                Quero comprar
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

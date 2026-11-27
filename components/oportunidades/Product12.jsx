@@ -6,24 +6,24 @@ import { motion } from "framer-motion";
 const lockedDeals = [
   {
     id: 1,
-    title: "Apartamento T2 — Beira-Mar",
-    zone: "Beira-Mar / Centro, Aveiro",
-    type: "Reabilitação Médio Porte",
-    image: "/algoritmo/algo-1.png",
+    title: "Apartamentos",
+    zone: "Aveiro centro",
+    type: "T1 a T3",
+    image: "/opt/obra-janela.jpg",
   },
   {
     id: 2,
-    title: "Moradia T3 — Glória e Vera Cruz",
-    zone: "Forca / Univ, Aveiro",
-    type: "Reabilitação Total",
-    image: "/algoritmo/algo-2.png",
+    title: "Moradias",
+    zone: "Esgueira / Aradas / Glória e Vera Cruz",
+    type: "T2 a T4",
+    image: "/opt/sala-ria.jpg",
   },
   {
     id: 3,
-    title: "Prédio Inteiro — Centro Histórico",
-    zone: "Beira-Mar / Centro, Aveiro",
-    type: "Reabilitação & Ampliação",
-    image: "/algoritmo/algo-3.png",
+    title: "Apartamentos e moradias",
+    zone: "Ílhavo / Gafanhas",
+    type: "Até 400.000 €",
+    image: "/opt/sala-render.jpg",
   },
 ];
 
@@ -45,7 +45,7 @@ export function Product12() {
                 color: GOLD,
               }}
             >
-              Feed de Oportunidades
+              Base de compradores
             </span>
             <h2
               className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] tracking-tight mb-4"
@@ -54,7 +54,7 @@ export function Product12() {
                 color: NAVY,
               }}
             >
-              Sinais de Lucro <span className="italic">Ocultos</span>
+              Antes dos <span className="italic">portais</span>
             </h2>
             <p
               className="text-base leading-relaxed"
@@ -64,34 +64,18 @@ export function Product12() {
                 fontWeight: 300,
               }}
             >
-              O FLIX não possui uma lista de imóveis estática ou pública. Cada oportunidade é calculada em tempo real com base nos seus critérios de acabamento, orçamento e ROI alvo.
+              Cada casa que vendemos vai primeiro para os compradores da nossa base com crédito já simulado. Só depois chega ao Idealista e aos outros portais.
             </p>
           </div>
           <div className="shrink-0">
-            <a
-              href="/#formulario"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300"
-              style={{
-                fontFamily: "'Outfit', system-ui, sans-serif",
-                background: NAVY,
-                color: "#F5F2ED",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = GOLD;
-                e.currentTarget.style.color = NAVY;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = NAVY;
-                e.currentTarget.style.color = "#F5F2ED";
-              }}
-            >
-              Configurar Estratégia
+            <a href="#formulario-comprador" className="btn-lux btn-lux--solid-dark btn-lux--block-mobile">
+              Simular crédito
             </a>
           </div>
         </div>
 
         {/* Locked Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="-mx-[5vw] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[5vw] pb-4 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0 md:pb-0">
           {lockedDeals.map((deal, index) => (
             <motion.div
               key={deal.id}
@@ -99,7 +83,7 @@ export function Product12() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative rounded-3xl overflow-hidden shadow-lg border transition-all duration-500 hover:shadow-2xl"
+              className="group relative w-[80%] shrink-0 snap-center rounded-3xl overflow-hidden shadow-lg border transition-all duration-500 hover:shadow-2xl md:w-auto"
               style={{
                 background: "rgba(255, 255, 255, 0.45)",
                 borderColor: `${NAVY}10`,
@@ -133,7 +117,7 @@ export function Product12() {
                       </svg>
                     </div>
                     <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-white/90">
-                      A aguardar estratégia
+                      Disponível após simulação
                     </span>
                   </div>
                 </div>
@@ -159,49 +143,36 @@ export function Product12() {
                 {/* Details Table */}
                 <div className="space-y-2.5 pt-2 border-t" style={{ borderColor: `${NAVY}10` }}>
                   <div className="flex justify-between items-center text-xs font-sans">
-                    <span className="opacity-50" style={{ color: NAVY }}>Tipo de Ativo</span>
+                    <span className="opacity-50" style={{ color: NAVY }}>Tipologia</span>
                     <span className="font-medium" style={{ color: NAVY }}>{deal.type}</span>
                   </div>
                   <div className="flex justify-between items-center text-xs font-sans">
-                    <span className="opacity-50" style={{ color: NAVY }}>ROI Estimado</span>
+                    <span className="opacity-50" style={{ color: NAVY }}>Preço e morada</span>
                     <span className="font-bold flex items-center gap-1" style={{ color: GOLD }}>
-                      🔒 Locked
+                      🔒 Na base
                     </span>
                   </div>
                   <div className="flex justify-between items-center text-xs font-sans">
-                    <span className="opacity-50" style={{ color: NAVY }}>Custos de Obra</span>
-                    <span className="font-semibold" style={{ color: `${NAVY}60` }}>A calcular...</span>
+                    <span className="opacity-50" style={{ color: NAVY }}>Renders e orçamento de obra</span>
+                    <span className="font-semibold" style={{ color: `${NAVY}60` }}>Incluídos</span>
                   </div>
                   <div className="flex justify-between items-center text-xs font-sans">
-                    <span className="opacity-50" style={{ color: NAVY }}>After Repair Value</span>
-                    <span className="font-semibold" style={{ color: `${NAVY}60` }}>A calcular...</span>
+                    <span className="opacity-50" style={{ color: NAVY }}>Relatório técnico</span>
+                    <span className="font-semibold" style={{ color: `${NAVY}60` }}>Incluído</span>
                   </div>
                 </div>
 
-                <a
-                  href="/#formulario"
-                  className="block w-full py-3 rounded-2xl text-center text-xs font-semibold uppercase tracking-[0.1em] transition-all duration-300"
-                  style={{
-                    fontFamily: "'Outfit', system-ui, sans-serif",
-                    background: `${NAVY}08`,
-                    border: `1px solid ${NAVY}15`,
-                    color: NAVY,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = NAVY;
-                    e.currentTarget.style.color = "#F5F2ED";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = `${NAVY}08`;
-                    e.currentTarget.style.color = NAVY;
-                  }}
-                >
-                  Ativar Sinais de Lucro
+                <a href="#formulario-comprador" className="btn-lux btn-lux--ghost-dark w-full">
+                  Entrar na base
                 </a>
               </div>
             </motion.div>
           ))}
         </div>
+
+        <p className="mt-2 text-center font-body text-[11px] uppercase tracking-[0.25em] md:hidden" style={{ color: `${NAVY}60` }}>
+          Deslize para ver mais →
+        </p>
 
         {/* Explain Box */}
         <motion.div
@@ -209,7 +180,7 @@ export function Product12() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-16 p-8 rounded-3xl border flex flex-col md:flex-row items-center gap-8 shadow-md"
+          className="mt-10 md:mt-16 p-6 md:p-8 rounded-3xl border flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-8 shadow-md"
           style={{
             background: "rgba(255, 255, 255, 0.45)",
             borderColor: `${NAVY}10`,
@@ -241,7 +212,7 @@ export function Product12() {
                 color: NAVY,
               }}
             >
-              Porquê os valores estão bloqueados?
+              Porque pedimos a simulação de crédito primeiro?
             </h4>
             <p
               className="text-sm leading-relaxed"
@@ -251,7 +222,7 @@ export function Product12() {
                 fontWeight: 300,
               }}
             >
-              O FLIX não opera como uma imobiliária comum. O nosso algoritmo cruza os materiais e o padrão de acabamento que prefere com as flutuações de mercado e estimativas reais de empreiteiros em Aveiro. Sem parametrizar a sua estratégia, qualquer taxa de retorno mostrada seria irrealista.
+              Porque o banco não financia pelo preço anunciado. Avalia pelo valor de transação e empresta, no máximo, 90% do menor valor entre o preço e a avaliação. Sem simulação, não há visita: assim sabe, antes de se apaixonar por uma casa, quanto dinheiro precisa até à escritura e qual será a prestação.
             </p>
           </div>
         </motion.div>

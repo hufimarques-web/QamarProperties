@@ -1,23 +1,22 @@
 import { Navbar14 } from "@/components/shared/Navbar14";
-import { HeroScroll } from "@/components/HeroScroll";
-import { Manifesto } from "@/components/inicio/Manifesto";
-import { Layout16 } from "@/components/inicio/Layout16";
-import { Layout394 } from "@/components/inicio/Layout394";
+import { IntroHero } from "@/components/IntroHero";
 import { InvestmentForm } from "@/components/inicio/InvestmentForm";
-import { Faq5 } from "@/components/inicio/Faq5";
-import { Footer3 } from "@/components/shared/Footer3";
+import { MonoHome, MonoMobileHome } from "@/components/mono/MonoHome";
 
+// A página segue o template MONO (v0) no computador e no telemóvel: ver components/mono.
+// No telemóvel, as secções entram em cascata (Emaar): cada uma fica presa ao ecrã
+// e a seguinte sobe por cima.
 export default function Page() {
   return (
     <div>
       <Navbar14 />
-      <HeroScroll />
-      <Manifesto />
-      <Layout16 />
-      <Layout394 />
-      <InvestmentForm />
-      <Faq5 />
-      <Footer3 />
+      <IntroHero />
+      {/* Telemóvel: o mesmo design do computador, com as secções em cascata */}
+      <MonoMobileHome />
+      {/* Formulário: só o modal (abre a partir dos botões, no telemóvel e no computador) */}
+      <InvestmentForm sectionClassName="hidden" />
+      {/* Computador */}
+      <MonoHome />
     </div>
   );
 }

@@ -12,7 +12,24 @@ function useNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const isPastHero = false;
+  const [isScrolled, setIsScrolled] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const on = () => setIsDesktop(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowLoading(false), 1700);
@@ -41,32 +58,46 @@ function useNavbar() {
     isDropdownOpen,
     setIsDropdownOpen,
     isPastHero,
+    isScrolled,
     showLoading,
+    isDesktop,
   };
 }
 
 const navLinks = [
   { href: "/", label: "Início" },
-  { href: "/oportunidades", label: "Oportunidades" },
-  { href: "/equipe", label: "Equipe" },
+  { href: "/oportunidades", label: "Comprar" },
+  { href: "/equipe", label: "Equipa" },
 ];
 
 const dropdownLinks = [
-  { href: "/depoimentos", label: "Depoimentos" },
+  { href: "/depoimentos", label: "Transparência" },
   { href: "/perguntas-frequentes", label: "Perguntas" },
-  { href: "/equipe", label: "Contato" },
+  { href: "/equipe#contacto", label: "Contacto" },
 ];
 
 export function Navbar14() {
   const pathname = usePathname();
   const nav = useNavbar();
-  const isHomepage = pathname === "/";
+  // Texto claro só com o menu móvel aberto (gaveta escura).
+  // O site é branco (estilo MONO) no computador e no telemóvel: logo escuro.
+  // todas as páginas seguem o design MONO da página inicial
+  const isMono = true;
+  const isHomepage = nav.isMobileMenuOpen;
 
   // Dynamic colors depending on whether we are on the homepage (light-on-dark/sky) or a subpage (dark-on-light)
   const textColorClass = isHomepage
     ? "text-white hover:text-white/70"
-    : "text-[#4C3D4A] hover:text-[#4C3D4A]/70";
-  const activeColorClass = "text-gold";
+    : isMono
+      ? "text-neutral-500 hover:text-black"
+      : "text-[#4C3D4A] hover:text-[#4C3D4A]/70";
+  const activeColorClass = isMono ? "text-black" : "text-gold";
+  // todas as páginas têm o formulário (modal): abre-o sem sair da página
+  const openSeller = (e) => {
+    e.preventDefault();
+    nav.setIsMobileMenuOpen(false);
+    window.dispatchEvent(new Event("open-investment-form"));
+  };
   const iconColor = isHomepage ? "text-white" : "text-[#4C3D4A]";
 
   return (
@@ -75,34 +106,42 @@ export function Navbar14() {
       {nav.showLoading && <div className="loading-line" aria-hidden="true" />}
 
       <motion.header
-        className={`fixed inset-x-0 top-0 z-[1000] bg-transparent py-4 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-[1000] transition-all duration-300 ${
+          nav.isMobileMenuOpen
+            ? "bg-[#2A2129] py-2"
+            : nav.isScrolled
+              ? "bg-[#F5F2ED]/95 py-1.5 shadow-[0_1px_0_rgba(76,61,74,0.08)] backdrop-blur-md"
+              : "bg-transparent py-3 md:py-4"
+        } ${
           nav.isPastHero ? "opacity-0 pointer-events-none" : "opacity-100"
+        } ${
+          isMono
+            ? "lg:top-4 lg:mx-auto lg:w-[92%] lg:max-w-[1080px] lg:rounded-[4px] lg:border lg:border-black/[0.06] lg:!bg-white/85 lg:!py-0 lg:shadow-[0_10px_40px_rgba(0,0,0,0.06)] lg:backdrop-blur-md"
+            : ""
         }`}
+        style={isMono ? { fontFamily: "Inter, system-ui, sans-serif" } : undefined}
+        data-nav-header
+        data-menu-open={nav.isMobileMenuOpen ? "true" : "false"}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: nav.isPastHero ? 0 : 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="relative mx-auto flex h-[64px] max-w-7xl items-center justify-between px-6 lg:px-8">
+        <div className={`relative mx-auto flex h-[56px] md:h-[64px] max-w-7xl items-center justify-between px-5 md:px-6 lg:px-8 ${isMono ? "lg:h-[60px] lg:!px-6" : ""}`}>
 
           {/* Inline SVG Logo with dynamic fill to match page background */}
           <Link href="/" className="flex items-center overflow-visible">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="-10 -10 460 170"
-              fill="none"
-              className={`h-8 md:h-[38px] w-auto overflow-visible transition-colors duration-300 ${
-                isHomepage ? "text-white" : "text-[#4C3D4A]"
-              }`}
-            >
-              <path d="M0 0 L0 150 L40 150 L40 95 L100 95 L100 65 L40 65 L40 35 L105 35 L105 0 Z" fill="currentColor"/>
-              <path d="M115 0 L115 150 L225 150 L225 120 L195 95 L155 95 L155 0 Z" fill="currentColor"/>
-              <path d="M240 0 L240 150 L280 150 L280 0 Z" fill="currentColor"/>
-              <path d="M295 0 L340 68 L295 150 L340 150 L365 108 L390 150 L435 150 L390 68 L435 0 L390 0 L365 38 L340 0 Z" fill="currentColor"/>
-            </svg>
+            <img
+              data-nav-logo
+              src={isHomepage ? "/logo/qamar-logo-light.png" : "/logo/qamar-logo-dark.png"}
+              alt="Qamar Properties"
+              width={836}
+              height={144}
+              className={`h-7 md:h-11 w-auto transition-all duration-300 ${isMono ? "lg:h-8" : ""}`}
+            />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-10 lg:flex">
+          <nav className={`hidden items-center lg:flex ${isMono ? "gap-8" : "gap-10"}`}>
             {navLinks.map(({ href, label }) => {
               const isActive = pathname === href;
               return (
@@ -110,7 +149,7 @@ export function Navbar14() {
                   key={href}
                   href={href}
                   data-text={label}
-                  className={`nav-slide font-body text-base tracking-wide font-medium transition-colors duration-300 ${
+                  className={`nav-slide ${isMono ? "text-[14px] font-normal" : "font-body text-base tracking-wide font-medium"} transition-colors duration-300 ${
                     isActive ? activeColorClass : textColorClass
                   }`}
                 >
@@ -127,7 +166,7 @@ export function Navbar14() {
             >
               <button
                 data-text="Recursos"
-                className={`nav-slide flex items-center gap-1.5 font-body text-base tracking-wide font-medium transition-colors duration-300 ${textColorClass}`}
+                className={`nav-slide flex items-center gap-1.5 ${isMono ? "text-[14px] font-normal" : "font-body text-base tracking-wide font-medium"} transition-colors duration-300 ${textColorClass}`}
               >
                 <span>Recursos</span>
                 <motion.span
@@ -172,16 +211,17 @@ export function Navbar14() {
           {/* CTA — rounded pill */}
           <div className="hidden items-center gap-3 lg:flex">
             <Link
-              href="/equipe"
+              href="/oportunidades#formulario-comprador"
               className={`font-body text-sm font-medium transition-colors duration-300 ${textColorClass}`}
             >
-              Entrar
+              Sou comprador
             </Link>
             <Link
               href="/#formulario"
-              className="rounded-full px-5 py-2.5 font-body text-sm font-semibold transition-all duration-300 bg-gold text-navy-deep hover:bg-gold-light hover:shadow-[inset_0_-2px_8px_rgba(0,0,0,0.12)]"
+              onClick={openSeller}
+              className={`btn-lux btn-lux--no-arrow min-h-[40px] px-5 text-[10px] ${isHomepage ? "btn-lux--ghost-light" : "btn-lux--solid-dark"}`}
             >
-              Registrar
+              Vender a minha casa
             </Link>
           </div>
 
@@ -189,7 +229,7 @@ export function Navbar14() {
           <button
             ref={nav.buttonRef}
             onClick={() => nav.setIsMobileMenuOpen((p) => !p)}
-            className="flex size-10 flex-col items-center justify-center gap-[5px] lg:hidden"
+            className="-mr-2 flex size-11 flex-col items-center justify-center gap-[5px] lg:hidden"
             aria-label="Menu"
           >
             {[0, 1, 2].map((i) => (
@@ -229,7 +269,7 @@ export function Navbar14() {
                     <Link
                       key={href + label}
                       href={href}
-                      className={`border-b border-white/10 py-3.5 font-body text-sm font-medium last:border-0 hover:text-gold ${
+                      className={`border-b border-white/10 py-4 font-body text-base font-medium last:border-0 hover:text-gold ${
                         isActive ? "text-gold font-semibold" : "text-cream/80"
                       }`}
                       onClick={() => nav.setIsMobileMenuOpen(false)}
@@ -240,18 +280,18 @@ export function Navbar14() {
                 })}
                 <div className="mt-5 flex flex-col gap-3">
                   <Link
-                    href="/equipe"
-                    className="border border-cream/20 px-4 py-3 text-center font-body text-sm font-medium text-cream rounded-full"
+                    href="/oportunidades#formulario-comprador"
+                    className="btn-lux btn-lux--ghost-light w-full"
                     onClick={() => nav.setIsMobileMenuOpen(false)}
                   >
-                    Entrar
+                    Sou comprador
                   </Link>
                   <Link
                     href="/#formulario"
-                    className="rounded-full bg-gold px-4 py-3 text-center font-body text-sm font-semibold text-navy-deep"
+                    className="btn-lux btn-lux--solid-light w-full"
                     onClick={() => nav.setIsMobileMenuOpen(false)}
                   >
-                    Registrar
+                    Vender a minha casa
                   </Link>
                 </div>
               </nav>

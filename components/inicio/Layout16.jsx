@@ -6,50 +6,50 @@ import styles from "./Services.module.css";
 
 const items = [
   {
-    id: "vigiar",
+    id: "estudar",
     number: "1",
-    label: "Vigiar",
-    image: "/services/vigiar.png",
-    body: "Monitorizamos cada portal de Aveiro em tempo real — Idealista, Imovirtual, Casa Sapo, Remax, ERA, Century 21, BPI Casa — mais a nossa rede privada off-market. Nenhum deal nos escapa. Nenhum dia te escapa.",
+    label: "Estudar",
+    image: "/opt/estudar.jpg",
+    body: "Antes de nos dizer o seu valor, mostramos-lhe o estudo de mercado: vendas reais na sua zona, preços anunciados e quanto lhe ficaria com uma imobiliária comum. Decide com números à frente.",
     modal: {
-      heading: "Motor de Vigilância",
+      heading: "Estudo de mercado",
       points: [
-        "Portais cobertos: Idealista · Imovirtual · Casa Sapo · Remax · ERA · Century 21 · BPI Casa.",
-        "Rede off-market privada de proprietários e mediadores parceiros em Aveiro.",
-        "Frequência de scan: a cada 15 minutos. Qualquer novo imóvel é imediatamente indexado e avaliado.",
-        "Se corresponder ao teu perfil, recebes alerta instantâneo — antes de aparecer nas listas genéricas.",
+        "Valor de transação: o preço a que casas comparáveis se venderam de facto, não o preço a que se anunciam.",
+        "Valor anunciado: o que está hoje nos portais. No início de 2026, a oferta anunciada andava cerca de 45% acima das vendas reais.",
+        "A conta de uma imobiliária comum: preço, menos 5% de comissão, menos IVA, sem prazo.",
+        "Não é uma avaliação: é informação de mercado para decidir, com calma, quanto quer receber.",
       ],
     },
   },
   {
-    id: "calcular",
+    id: "valorizar",
     number: "2",
-    label: "Calcular",
-    image: "/services/calcular.png",
-    body: "Cada novo imóvel é avaliado em segundos contra o teu critério: yield bruto e líquido, cash-on-cash, ARV, custos de renovação estimados. Sabes se o deal faz sentido antes de visitar.",
+    label: "Valorizar",
+    image: "/opt/valorizar.jpg",
+    body: "O comprador não vê só a casa como está. Vê a casa como a quer: fotografia profissional, renders à escala, orçamento de obra e relatório técnico. É assim que se vende rápido.",
     modal: {
-      heading: "Motor de Cálculo",
+      heading: "A casa como o comprador a quer",
       points: [
-        "Yield bruto e yield líquido calculados com base em rendas de mercado em Aveiro.",
-        "Cash-on-cash return ajustado ao teu capital próprio e estrutura de financiamento.",
-        "ARV (after repair value) estimado com base em comparáveis recentes na mesma zona.",
-        "Custos de renovação estimados por m² com dados de empreiteiros locais.",
+        "Fotografia profissional e pack de renders 3D à escala, sempre identificados como simulação, ao lado das fotos reais.",
+        "Relatório técnico da Freitas Renovações (empresa do grupo, dito claramente) e engenheiro externo para estrutura e humidades.",
+        "Orçamento de obra ligado ao render, com âmbito, exclusões e prazo.",
+        "Pequenas melhorias, como pintura e limpeza, só as propomos quando devolvem pelo menos 4 vezes o que custam.",
       ],
     },
   },
   {
-    id: "filtrar",
+    id: "vender",
     number: "3",
-    label: "Filtrar",
-    image: "/services/filtrar.png",
-    body: "Só vês os deals que correspondem ao teu perfil de investimento. Sem ruído. Sem listas genéricas. Sem perder oportunidades enquanto dormes — o algoritmo trabalha 24/7 por ti.",
+    label: "Vender",
+    image: "/opt/vender.jpg",
+    body: "A sua casa vai primeiro para a nossa base de compradores com crédito já simulado, e só depois para os portais. Com 5 ou mais interessados, abrimos uma janela de propostas com data limite.",
     modal: {
-      heading: "Motor de Filtragem",
+      heading: "Venda em 60 dias",
       points: [
-        "O teu perfil define os filtros: tipo de imóvel, zona, yield mínima, preço máximo, estado.",
-        "O algoritmo filtra centenas de imóveis por dia. Só os que passam todos os critérios chegam a ti.",
-        "Zero ruído. Zero listas genéricas. Só oportunidades que fazem sentido para o teu modelo.",
-        "24/7 — o algoritmo não dorme. Enquanto descansas, ele trabalha.",
+        "Base de compradores qualificados: sem simulação de crédito, não há visita.",
+        "Com 5 ou mais interessados, janela de propostas com data e validade registadas. Sem concorrência inventada.",
+        "Nunca abaixo do seu valor líquido. CPCV com sinal de 5 a 10% e condição de crédito aprovado.",
+        "Se não vendermos em 60 dias, saímos e fica com as fotos e os renders.",
       ],
     },
   },
@@ -134,7 +134,7 @@ function Modal({ item, onClose }) {
             setTimeout(() => window.dispatchEvent(new Event("open-investment-form")), 600);
           }}
         >
-          Calibrar o meu algoritmo →
+          Quanto recebo na carteira? →
         </a>
       </motion.div>
     </motion.div>
@@ -152,15 +152,15 @@ export function Layout16() {
         <div className={styles.container}>
           <div className={styles.services_hgrid}>
             <div className={styles.services_hgrid_col}>
-              <div className={styles.services_caption}>O Algoritmo</div>
+              <div className={styles.services_caption}>O Modelo</div>
             </div>
             <div className={styles.services_hgrid_col}>
               <div className={styles.services_title}>
                 <h2>
-                  <div aria-label="Como o FLIX trabalha por ti.">
-                    <ScrubLine>Como o FLIX</ScrubLine>
+                  <div aria-label="Como vendemos em 60 dias.">
+                    <ScrubLine>Como vendemos</ScrubLine>
                     <ScrubLine>
-                      <span className={styles.em}>trabalha por ti.</span>
+                      <span className={styles.em}>em 60 dias.</span>
                     </ScrubLine>
                   </div>
                 </h2>

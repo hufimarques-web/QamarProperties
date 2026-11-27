@@ -20,7 +20,7 @@ export function HeroScroll() {
   const textScale   = useTransform(scrollYProgress, [0, 0.22], [1, 0.9996]);
   const textOpacity = useTransform(scrollYProgress, [0.08, 0.22], [1, 0]);
 
-  // Building fades out as FLIX wordmark takes over
+  // Building fades out as QAMAR wordmark takes over
   const buildingOpacity = useTransform(scrollYProgress, [0.28, 0.42], [1, 0]);
 
   // Wordmark Reveal (End of scroll)
@@ -31,7 +31,7 @@ export function HeroScroll() {
 
   const buildingImg = "/images/fea9976f-38ce-446a-b21c-a6742cbe7f22.png";
   const canalImg = "/images/cria_logo_fundo_imagem_1_202605251301.jpeg";
-  const headline = ["Aveiro.", "Antes", "do", "mercado."];
+  const headline = ["Diga", "quanto", "quer", "receber."];
 
   return (
     <section ref={containerRef} className="relative h-[400vh]" id="hero">
@@ -90,7 +90,7 @@ export function HeroScroll() {
         >
           <img 
             src={buildingImg}
-            alt="Aveiro Architecture" 
+            alt="Casa na Região de Aveiro" 
             className="w-full h-auto block drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
             style={{
               maskImage: "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)",
@@ -99,7 +99,7 @@ export function HeroScroll() {
           />
         </motion.div>
 
-{/* Wordmark Reveal (The FLIX climax) */}
+{/* Wordmark Reveal (QAMAR climax) */}
         <motion.div
           style={{ opacity: wordmarkOpacity, zIndex: 40, background: "linear-gradient(to bottom, #b6cfe5 0%, #c9d8e8 45%, #f8e2cc 100%)" }}
           className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
@@ -110,12 +110,12 @@ export function HeroScroll() {
               backgroundPosition: "center 55%",
               backgroundSize: "cover"
             }}
-            className="font-sans font-[900] text-[clamp(100px,25vw,420px)] leading-[0.85] tracking-tight bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] w-full text-center"
+            className="font-sans font-[900] text-[clamp(72px,19vw,340px)] leading-[0.85] tracking-tight bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent] w-full text-center"
           >
-            FLIX
+            QAMAR
           </h2>
           <div className="mt-6 text-[clamp(14px,1.5vw,24px)] font-bold text-[#1a1a1a]/40 tracking-[0.6em] uppercase font-sans">
-            A lista privada de Aveiro.
+            Vendemos em 60 dias.
           </div>
         </motion.div>
 

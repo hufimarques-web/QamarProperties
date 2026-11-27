@@ -2,33 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { faqs } from "@/lib/faqs";
 
-const faqs = [
-  {
-    q: "O que é o FLIX e como funciona?",
-    a: "O FLIX é um algoritmo avançado que monitoriza o mercado imobiliário de Aveiro em tempo real. Rastreia portais de referência (Idealista, Imovirtual, Casa Sapo, ERA, Remax, Century 21, BPI Casa) e a nossa rede privada off-market. O sistema analisa cada oportunidade em segundos, estima custos de obra e projeta o ARV (After Repair Value), enviando-lhe sinais de lucro automáticos quando encontra negócios lucrativos.",
-  },
-  {
-    q: "O que são os 'sinais de lucro'?",
-    a: "São notificações enviadas diretamente para a sua caixa de entrada sempre que o algoritmo identifica um imóvel com alta rentabilidade. As oportunidades são classificadas pela sua margem estimada: um potencial de 10% gera um sinal fraco, 25% indica um bom negócio e retornos acima de 30% representam oportunidades raras e prioritárias.",
-  },
-  {
-    q: "Como são calculados os custos de renovação estimados?",
-    a: "O FLIX calcula os custos de obra com base em dados reais de empreiteiros parceiros em Aveiro. O cálculo ajusta-se dinamicamente ao padrão de acabamento configurado na sua estratégia: Standard Moderno, Premium (com materiais nobres) ou Luxo Exclusivo, permitindo-lhe saber se o deal faz sentido antes mesmo de fazer uma visita.",
-  },
-  {
-    q: "Qual é o valor mínimo de investimento por operação?",
-    a: "O algoritmo permite filtrar e parametrizar as oportunidades de acordo com o seu capital disponível. Trabalhamos com intervalos de investimento flexíveis a partir de €100.000 (abrangendo desde apartamentos no centro histórico a moradias e prédios inteiros para reabilitação).",
-  },
-  {
-    q: "Como o algoritmo calcula o ARV (After Repair Value)?",
-    a: "O ARV é calculado cruzando o valor de mercado pós-obra estimado para a zona específica de Aveiro com comparáveis imobiliários recentes e dados históricos. Isto garante que só vê oportunidades onde a margem de lucro líquido (considerando aquisição, impostos e custos de renovação) cumpre a sua meta de retorno.",
-  },
-  {
-    q: "Posso personalizar a minha estratégia no FLIX?",
-    a: "Sim, totalmente. Através do nosso configurador de estratégia, pode definir o tipo de imóvel (apartamentos, moradias, terrenos ou prédios), o ROI mínimo desejado, a localização prioritária (Beira-Mar/Centro, Forca/Univ, Arredores), o nível de acabamentos e o seu orçamento disponível para receber sinais 100% personalizados.",
-  },
-];
+
 
 const NAVY = "#4C3D4A";
 const GOLD = "#CBA94B";
@@ -60,7 +36,7 @@ function FaqItem({ faq, index, isOpen, onToggle }) {
                 color: isOpen ? GOLD : `${NAVY}35`,
               }}
             >
-              0{index + 1}
+              {String(index + 1).padStart(2, "0")}
             </span>
             <span
               className="text-lg md:text-xl font-medium leading-snug transition-colors duration-300"
@@ -188,43 +164,16 @@ export function Faq5() {
                 fontWeight: 300,
               }}
             >
-              Investir com confiança começa com informação clara. Se a sua dúvida não está aqui, fale connosco diretamente.
+              Vender com confiança começa com regras claras. Se a sua dúvida não está aqui, fale connosco diretamente.
             </p>
 
             <a
-              href="https://wa.me/351910000000"
+              href="https://wa.me/351967708397"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full text-sm font-medium transition-all duration-500 group"
-              style={{
-                fontFamily: "'Outfit', system-ui, sans-serif",
-                background: NAVY,
-                color: "#F5F2ED",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = GOLD;
-                e.currentTarget.style.color = NAVY;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = NAVY;
-                e.currentTarget.style.color = "#F5F2ED";
-              }}
+              className="btn-lux btn-lux--solid-dark btn-lux--block-mobile"
             >
-              Fale Connosco
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
+              Fale connosco
             </a>
           </motion.div>
 

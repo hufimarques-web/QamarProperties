@@ -8,35 +8,35 @@ const NAVY = "#4C3D4A";
 const steps = [
   {
     number: "01",
-    label: "Monitorização Contínua",
-    tagline: "Vigilância",
-    title: "Vigilância Automática 24/7 em Aveiro",
-    description: "O algoritmo FLIX varre os portais imobiliários líderes (Idealista, Imovirtual, Casa Sapo, ERA, Remax, Century 21, BPI Casa) e a nossa rede privada off-market a cada 15 minutos. Nenhuma nova oportunidade escapa ao radar.",
-    image: "/images/hero-facade.jpg",
+    label: "Crédito primeiro",
+    tagline: "Simulação",
+    title: "Sabe quanto pode comprar antes de visitar",
+    description: "Simulamos o seu crédito com as regras do Banco de Portugal: taxa de esforço máxima de 45%, testada com subida de juros, e financiamento até 90%. Vê o dinheiro de que precisa até à escritura, a prestação e a reserva que lhe sobra. Os casos mais apertados são confirmados pelo nosso intermediário de crédito parceiro.",
+    image: "/opt/fachada.jpg",
   },
   {
     number: "02",
-    label: "Estimativa Realista",
-    tagline: "Cálculo",
-    title: "Custo de Obra e Margem Calculados em Segundos",
-    description: "Cruzamos o padrão de acabamentos que escolheu (Standard, Premium ou Luxo) com estimativas atualizadas por metro quadrado de empreiteiros locais em Aveiro. O cálculo do ARV (After Repair Value) é feito antes mesmo de visitar o imóvel.",
-    image: "/algoritmo/algo-4.png",
+    label: "Base de compradores",
+    tagline: "Antes dos portais",
+    title: "Recebe as casas compatíveis primeiro",
+    description: "Quando entra uma casa que encaixa no que procura e no que pode pagar, recebe-a antes de ir para os portais. Fotos reais primeiro, renders sempre ao lado e identificados como simulação.",
+    image: "/opt/valorizar.jpg",
   },
   {
     number: "03",
-    label: "Filtro Inteligente",
-    tagline: "Foco",
-    title: "Zero Distrações. Apenas o que Importa.",
-    description: "Eliminamos o ruído das listas públicas. O algoritmo filtra centenas de anúncios diariamente e só sinaliza imóveis que correspondem exatamente à sua meta de ROI, tipo de ativo, orçamento e localização.",
-    image: "/algoritmo/Interior_of_a_finish-382651.png",
+    label: "Dossier da casa",
+    tagline: "Tudo por escrito",
+    title: "A casa como a quer, com números reais",
+    description: "Depois da visita, e com interesse claro, preparamos o dossier: renders com 2 ou 3 usos do espaço e os seus móveis, orçamento de obra com âmbito e prazo, cenários de crédito, relatório técnico e documentos do condomínio. Cada informação vem marcada como comprovada, declarada, estimada ou desconhecida.",
+    image: "/opt/sala-ria.jpg",
   },
   {
     number: "04",
-    label: "Sinais de Lucro",
-    tagline: "Velocidade",
-    title: "Alertas Diretos com Viabilidade Completa",
-    description: "Assim que um negócio preenche os seus critérios e excede o seu sinal de lucro alvo, recebe uma ficha detalhada no seu e-mail. Decida com agilidade com base em dados de mercado consolidados e transparentes.",
-    image: "/algoritmo/algo-3.png",
+    label: "Proposta e CPCV",
+    tagline: "Sem pressão",
+    title: "Propostas com data, sem concorrência inventada",
+    description: "Com 5 ou mais interessados, abrimos uma janela de propostas com data limite. Cada proposta fica registada com data e validade. O CPCV leva sinal de 5 a 10% e condição de crédito aprovado: se o crédito falhar, o sinal é devolvido. Depois da escritura, acompanhamos 3 meses.",
+    image: "/opt/sala-render.jpg",
   },
 ];
 
@@ -54,7 +54,7 @@ export function Layout357() {
               color: GOLD,
             }}
           >
-            A Pipeline do Algoritmo
+            O circuito do comprador
           </span>
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] tracking-tight"
@@ -63,19 +63,19 @@ export function Layout357() {
               color: NAVY,
             }}
           >
-            Como criamos o seu{" "}
+            Como compra{" "}
             <span className="italic" style={{ color: `${NAVY}BB` }}>
-              deal flow.
+              connosco.
             </span>
           </h2>
         </div>
 
         {/* Steps Stack */}
-        <div className="space-y-24 md:space-y-36">
+        <div className="space-y-14 md:space-y-36">
           {steps.map((step, index) => (
             <div
               key={step.number}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center border-t pt-12 md:pt-16"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center border-t pt-10 md:pt-16"
               style={{ borderColor: `${NAVY}15` }}
             >
               {/* Text Column */}
@@ -123,7 +123,7 @@ export function Layout357() {
 
                 <div className="pt-4">
                   <a
-                    href="/#formulario"
+                    href="#formulario-comprador"
                     className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-300"
                     style={{
                       fontFamily: "'Outfit', system-ui, sans-serif",
@@ -136,7 +136,7 @@ export function Layout357() {
                       e.currentTarget.style.color = GOLD;
                     }}
                   >
-                    Configurar agora →
+                    Simular crédito →
                   </a>
                 </div>
               </div>

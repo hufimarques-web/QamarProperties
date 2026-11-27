@@ -1,7 +1,45 @@
 "use client";
 
 import React from "react";
-import { BiSolidStar } from "react-icons/bi";
+
+const objections = [
+  {
+    q: "“A avaliação do banco pode não chegar.”",
+    a: "Calculadora com avaliação a 100, 95, 90 e 85% do preço: vê o capital extra de que precisa em cada cenário, antes do CPCV. E o CPCV leva condição de crédito aprovado.",
+  },
+  {
+    q: "“Consigo pagar tudo?”",
+    a: "Mostramos o dinheiro necessário até à escritura, a prestação, a taxa de esforço com subida de juros e a reserva que lhe sobra.",
+  },
+  {
+    q: "“Estou a comprar caro?”",
+    a: "Comparamos com vendas reais, não com anúncios, e explicamos as diferenças entre cada casa.",
+  },
+  {
+    q: "“A casa esconde problemas?”",
+    a: "Relatório técnico da Freitas Renovações, empresa do nosso grupo, e engenheiro externo para estrutura e humidades.",
+  },
+  {
+    q: "“Obras do prédio? Está tudo legal?”",
+    a: "Atas e contas do condomínio. Áreas e documentos comparados; qualquer divergência segue para o solicitador.",
+  },
+  {
+    q: "“As fotos enganam.”",
+    a: "Fotos reais primeiro. Os renders aparecem sempre ao lado e identificados como simulação.",
+  },
+  {
+    q: "“Não me imagino lá. Os meus móveis não cabem.”",
+    a: "Modelo 3D à escala, com 2 ou 3 usos do espaço e os seus próprios móveis.",
+  },
+  {
+    q: "“Quanto custam as obras?”",
+    a: "Orçamento com âmbito, exclusões e prazo, ligado ao render. Pode adjudicar ou usar só como referência.",
+  },
+  {
+    q: "“Estão a pressionar-me.”",
+    a: "Propostas registadas com data e validade, sem concorrência inventada. Dizemos-lhe que somos pagos pelo vendedor. E depois da escritura, acompanhamos 3 meses.",
+  },
+];
 
 export function Testimonial17() {
   return (
@@ -9,91 +47,22 @@ export function Testimonial17() {
       <div className="container">
         <div className="mx-auto mb-12 w-full max-w-lg text-center md:mb-18 lg:mb-20">
           <h2 className="mb-5 text-5xl font-bold md:mb-6 md:text-7xl lg:text-8xl">
-            Histórias reais
+            As suas dúvidas, respondidas
           </h2>
-          <p className="md:text-md">€18.500 em 9 meses, sem tocar em nada</p>
+          <p className="md:text-md">
+            O que os compradores nos perguntam, e o que lhes mostramos antes do CPCV.
+          </p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="flex w-full flex-col items-start justify-between border border-border-primary p-6 md:p-8">
-            <div className="rb-5 mb-5 md:mb-6">
-              <div className="mb-5 flex md:mb-6">
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-              </div>
-              <blockquote className="md:text-md">
-                "Investi €50.000 em um projeto de reabilitação no Porto. Recebi
-                meus retornos conforme prometido, com documentação clara em cada
-                etapa. Não precisei fazer nada além de assinar os papéis."
-              </blockquote>
+          {objections.map(({ q, a }) => (
+            <div
+              key={q}
+              className="flex w-full flex-col items-start border border-border-primary p-6 md:p-8"
+            >
+              <p className="mb-4 text-xl font-bold leading-[1.4] md:text-2xl">{q}</p>
+              <p className="md:text-md">{a}</p>
             </div>
-            <div className="mt-5 flex w-full flex-col items-start md:mt-6 md:w-fit md:flex-row md:items-center">
-              <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                alt="Testimonial avatar"
-                className="mb-4 size-12 min-h-12 min-w-12 rounded-full object-cover md:mb-0 md:mr-4"
-              />
-              <div>
-                <p className="font-semibold">Carlos Mendes</p>
-                <p>Empresário, São Paulo</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-col items-start justify-between border border-border-primary p-6 md:p-8">
-            <div className="rb-5 mb-5 md:mb-6">
-              <div className="mb-5 flex md:mb-6">
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-              </div>
-              <blockquote className="md:text-md">
-                "O contrato estava blindado. Meu advogado revisou tudo. Seis
-                meses depois, o dinheiro voltou com 22% de retorno. Simples
-                assim."
-              </blockquote>
-            </div>
-            <div className="mt-5 flex w-full flex-col items-start md:mt-6 md:w-fit md:flex-row md:items-center">
-              <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                alt="Testimonial avatar"
-                className="mb-4 size-12 min-h-12 min-w-12 rounded-full object-cover md:mb-0 md:mr-4"
-              />
-              <div>
-                <p className="font-semibold">Helena Rocha</p>
-                <p>Gestora de fundos, Lisboa</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-col items-start justify-between border border-border-primary p-6 md:p-8">
-            <div className="rb-5 mb-5 md:mb-6">
-              <div className="mb-5 flex md:mb-6">
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-                <BiSolidStar className="mr-1 size-6" />
-              </div>
-              <blockquote className="md:text-md">
-                "Tinha €100.000 parado. Agora trabalha para mim em Lisboa. Já
-                fiz três operações. Nenhuma surpresa, nenhum problema."
-              </blockquote>
-            </div>
-            <div className="mt-5 flex w-full flex-col items-start md:mt-6 md:w-fit md:flex-row md:items-center">
-              <img
-                src="https://d22po4pjz3o32e.cloudfront.net/placeholder-image.svg"
-                alt="Testimonial avatar"
-                className="mb-4 size-12 min-h-12 min-w-12 rounded-full object-cover md:mb-0 md:mr-4"
-              />
-              <div>
-                <p className="font-semibold">Miguel Ferreira</p>
-                <p>Investidor imobiliário, Braga</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
