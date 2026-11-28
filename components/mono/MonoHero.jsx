@@ -265,12 +265,11 @@ export function MonoHero({ ready = true }) {
                 </motion.span>
               </motion.div>
               {/* Casa recortada (céu transparente).
-                  No telemóvel fica centrada, mais pequena e logo abaixo do nome (o edifício cabe inteiro
-                  e a frase fica por baixo, sobre o branco). */}
-              <div className="absolute bottom-[31svh] left-1/2 aspect-video h-[44svh] -translate-x-1/2 md:bottom-0 md:left-0 md:h-auto md:w-full md:translate-x-0">
+                  No telemóvel fica mais alta e centrada (corta os lados). */}
+              <div className="absolute bottom-0 left-1/2 aspect-video h-[66svh] -translate-x-1/2 md:left-0 md:h-auto md:w-full md:translate-x-0">
                 <motion.img
-                  src="/mono/hero-edificio.webp"
-                  alt="Edifício histórico sobre a água, com um prédio em socalcos por trás"
+                  src="/mono/hero-cut.webp"
+                  alt="Casa tradicional com azulejos junto a um canal de Aveiro"
                   className="h-full w-full object-cover"
                   initial={{ scale: 1.08, opacity: 0 }}
                   animate={ready ? { scale: 1, opacity: 1 } : { scale: 1.08, opacity: 0 }}
@@ -281,14 +280,14 @@ export function MonoHero({ ready = true }) {
             </motion.div>
             </div>
 
-            {/* Frase: no computador sobre a água, no telemóvel sobre o branco, por baixo do edifício */}
-            <motion.div className="pointer-events-none absolute inset-x-0 bottom-0 hidden bg-gradient-to-t to-transparent md:block md:h-[34vh] md:from-black/45" style={{ opacity: tagOpacity }} />
+            {/* Frase sobre a água */}
+            <motion.div className="pointer-events-none absolute inset-x-0 bottom-0 h-[44svh] bg-gradient-to-t from-black/55 to-transparent md:h-[34vh] md:from-black/45" style={{ opacity: tagOpacity }} />
             <motion.div
-              className="absolute bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-5 right-5 z-10 flex flex-col items-start text-left text-[#0A0A0A] md:bottom-[6vh] md:text-white md:left-[5vw] md:right-auto md:max-w-[46vw]"
+              className="absolute bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-5 right-5 z-10 flex flex-col items-start text-left text-white md:bottom-[6vh] md:left-[5vw] md:right-auto md:max-w-[46vw]"
               style={{ opacity: tagOpacity }}
             >
               <motion.h1
-                className="font-normal leading-[1.2] tracking-[-0.01em] md:[text-shadow:0_1px_24px_rgba(0,0,0,0.25)]"
+                className="font-normal leading-[1.2] tracking-[-0.01em] [text-shadow:0_1px_24px_rgba(0,0,0,0.25)]"
                 style={{ fontSize: "clamp(22px, 2.3vw, 38px)" }}
                 initial={{ opacity: 0, y: 16 }}
                 animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
@@ -303,7 +302,7 @@ export function MonoHero({ ready = true }) {
                 onClick={() =>
                   window.dispatchEvent(new CustomEvent("open-investment-form", { detail: { view: "sim" } }))
                 }
-                className="mt-5 text-left text-[13px] text-neutral-600 underline-offset-4 transition-colors hover:text-[#0A0A0A] hover:underline md:text-white/85 md:hover:text-white"
+                className="mt-5 text-[13px] text-white/85 underline-offset-4 transition-colors hover:text-white hover:underline"
                 initial={{ opacity: 0 }}
                 animate={ready ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 1, delay: 1.7 }}
